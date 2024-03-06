@@ -6,6 +6,8 @@ Here you'll find comprehensive guides, tutorials, and reference materials to hel
 ##  Building the site
 To get started, clone the repository and run the following:
 
-``` yarn && yarn dev ```
+```
+yarn && yarn dev
+```
 
 This documentation site is built with VitePress
