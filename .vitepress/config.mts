@@ -5,7 +5,12 @@ export default defineConfig({
   title: "MWC Documentations",
   description: "A VitePress Site",
   cleanUrls: true,
+  lastUpdated: true,
   themeConfig: {
+    editLink: {
+      pattern: 'https://github.com/mwcproject/docs.mwc.mw/edit/main/:path'
+    },
+    
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
