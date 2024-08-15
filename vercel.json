@@ -1,0 +1,10 @@
+{
+    "cleanUrls": true,
+    "builds": [
+      {
+        "src": ".vitepress/dist/**/*",
+        "use": "@vercel/static"
+      }
+    ]
+  }
+  
