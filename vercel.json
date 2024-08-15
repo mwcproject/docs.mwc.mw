@@ -2,8 +2,11 @@
     "cleanUrls": true,
     "builds": [
       {
-        "src": ".vitepress/dist/**/*",
-        "use": "@vercel/static"
+        "src": "package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": ".vitepress/dist"
+        }
       }
     ]
   }
