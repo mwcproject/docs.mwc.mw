@@ -71,7 +71,7 @@ function nav() {
 
 function sidebarHome() {
   return [
-    {
+    /*{
       text: "Quick start",
       collapsed: true,
       items: [
@@ -152,7 +152,7 @@ function sidebarHome() {
           ],
         },
       ],
-    },
+    },*/
     {
       text: "Wallet",
       collapsed: true,
@@ -449,7 +449,7 @@ function sidebarHome() {
         },
       ],
     },
-    {
+    /*{
       text: "Miners",
       collapsed: true,
       items: [
@@ -749,6 +749,6 @@ function sidebarHome() {
           link: "/community/itn-tos",
         },
       ],
-    },
+    },*/
   ];
 }
