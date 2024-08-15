@@ -5,7 +5,11 @@ export default defineConfig({
   description: "A VitePress Site",
   cleanUrls: true,
   lastUpdated: true,
-  
+  vite: {
+    build: {
+      minify: false  // Disable HTML, CSS, and JS minification
+    }
+  }, // Disable HTML, CSS, and JS minification
   themeConfig: {
     nav: nav(),
     outline: {
