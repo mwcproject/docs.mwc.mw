@@ -160,6 +160,10 @@ function sidebarHome() {
       collapsed: true,
       items: [
         {
+          text: "Introduction",
+          link: "/wallet/introduction"
+        },
+        {
           text: "Desktop",
           collapsed: true,
           items: [
