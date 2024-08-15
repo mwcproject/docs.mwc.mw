@@ -1,0 +1,12 @@
+{
+    "builds": [
+      {
+        "src": ".vitepress/dist/**/*",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "/$1" }
+    ]
+  }
+  

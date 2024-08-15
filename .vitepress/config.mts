@@ -154,7 +154,7 @@ function sidebarHome() {
       ],
     },
     {
-      text: "Wallets",
+      text: "Wallet",
       collapsed: true,
       items: [
         {
@@ -523,94 +523,6 @@ function sidebarHome() {
         },
       ],
     },
-    {
-      "text": "Learn MimbleWimble",
-      "collapsed": true,
-      "items": [
-        {
-          "text": "Introduction to MimbleWimble",
-          "items": [
-            {
-              "text": "Overview of MimbleWimble",
-              "link": "/mimblewimble/introduction-overview"
-            },
-            {
-              "text": "History and Development",
-              "link": "/mimblewimble/history-development"
-            }
-          ]
-        },
-        {
-          "text": "Core Concepts",
-          "items": [
-            {
-              "text": "Confidenmwcl Transactions",
-              "link": "/core-concepts/confidenmwcl-transactions"
-            },
-            {
-              "text": "Blinding Factors",
-              "link": "/core-concepts/blinding-factors"
-            },
-            {
-              "text": "Transaction Aggregation",
-              "link": "/core-concepts/transaction-aggregation"
-            }
-          ]
-        },
-        {
-          "text": "Technical Details",
-          "items": [
-            {
-              "text": "Block Structure",
-              "link": "/technical-details/block-structure"
-            },
-            {
-              "text": "Scriptless Scripts",
-              "link": "/technical-details/scriptless-scripts"
-            },
-            {
-              "text": "Dandelion Protocol",
-              "link": "/technical-details/dandelion-protocol"
-            }
-          ]
-        },
-        {
-          "text": "Security and Privacy",
-          "items": [
-            {
-              "text": "Benefits and Limitations",
-              "link": "/security-privacy/benefits-limitations"
-            },
-            {
-              "text": "Comparative Analysis",
-              "link": "/security-privacy/comparative-analysis"
-            }
-          ]
-        },
-        {
-          "text": "Future Developments",
-          "items": [
-            {
-              "text": "Upcoming Features",
-              "link": "/future-developments/upcoming-features"
-            },
-            {
-              "text": "Research Areas",
-              "link": "/future-developments/research-areas"
-            }
-          ]
-        },
-        {
-          "text": "FAQ",
-          "items": [
-            {
-              "text": "Frequently Asked Questions",
-              "link": "/faq-mimblewimble"
-            }
-          ]
-        }
-      ]
-    },    
     {
       text: "Developers",
       collapsed: true,
