@@ -5,12 +5,14 @@ export default defineConfig({
   description: "A VitePress Site",
   cleanUrls: true,
   lastUpdated: true,
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
+  ],
   themeConfig: {
     nav: nav(),
     outline: {
       level: "deep",
     },
-
     search: {
       provider: "local",
       options: {
@@ -18,21 +20,22 @@ export default defineConfig({
       },
     },
     editLink: {
-      pattern: 'https://github.com/mwcproject/docs.mwc.mw/edit/main/:path'
+      pattern: 'https://github.com/mwcproject/docs.mwc.mw/edit/main/:path',
+      text: 'Edit this page on GitHub'
     },
-    
-    // https://vitepress.dev/reference/default-theme-config
-
-    sidebar:{
+    lastUpdatedText: 'Last updated',
+    sidebar: {
       "/": sidebarHome(),
     }, 
-
     socialLinks: [
       { icon: 'github', link: 'https://github.com/mwcproject/docs.mwc.mw' }
-    ]
+    ],
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2024 MWC Project'
+    },
   },
 });
-
 
 function nav() {
   return [
