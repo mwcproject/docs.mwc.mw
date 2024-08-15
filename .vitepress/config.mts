@@ -33,19 +33,6 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/mwcproject/docs.mwc.mw' }
     ]
   },
-
-  // The transformPageData hook should be outside the themeConfig object
-  transformPageData(pageData) {
-    // Check if the current page is the "wallet/ledger/" index
-    if (pageData.relativePath === 'wallet/ledger/index.md') {
-      // Add redirect frontmatter
-      pageData.frontmatter = {
-        ...pageData.frontmatter,
-        redirect: '/wallet/ledger/get-started',
-      };
-    }
-    return pageData;
-  },
 });
 
 
