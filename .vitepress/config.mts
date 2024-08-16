@@ -35,6 +35,18 @@ export default defineConfig({
       copyright: 'Copyright © 2024 MWC Project'
     },
   },
+  // The transformPageData hook should be outside the themeConfig object
+  transformPageData(pageData) {
+    // Check if the current page is the "wallet/ledger/" index
+    if (pageData.relativePath === 'wallet/ledger/index.md') {
+      // Add redirect frontmatter
+      pageData.frontmatter = {
+        ...pageData.frontmatter,
+        redirect: '/wallet/ledger/get-started',
+      };
+    }
+    return pageData;
+  },
 });
 
 function nav() {
