@@ -86,84 +86,20 @@ function nav() {
 function sidebarHome() {
   return [
     {
-      text: "Quick start",
+      text: "Node",
       collapsed: true,
       items: [
         {
-          text: "Nodes",
-          collapsed: true,
-          items: [
-            {
-              text: "Introduction",
-              link: "/learn/how-mwc-works/overview",
-            },
-            {
-              text: "Monolithic vs. modular blockchains",
-              link: "/learn/how-mwc-works/monolithic-vs-modular",
-            },
-            {
-              text: "Data availability layer",
-              collapsed: true,
-              items: [
-                {
-                  text: "mwc's data availability layer",
-                  link: "/learn/how-mwc-works/data-availability-layer",
-                },
-                {
-                  text: "The lifecycle of a mwc-app transaction",
-                  link: "/learn/how-mwc-works/transaction-lifecycle",
-                },
-              ],
-            },
-            {
-              text: "Extra resources",
-              collapsed: true,
-              items: [
-                {
-                  text: "Learn modular",
-                  link: "https://mwc.org/learn/",
-                },
-                {
-                  text: "mwc-app specifications",
-                  link: "https://mwcorg.github.io/mwc-app/",
-                },
-                {
-                  text: "mwc-node API documentation",
-                  link: "https://node-rpc-docs.mwc.org/",
-                },
-                {
-                  text: "mwc glossary",
-                  link: "https://mwc.org/glossary/",
-                },
-              ],
-            },
-          ],
+          text: "Introduction",
+          link: "/node/introduction",
         },
         {
-          text: "mwc",
-          collapsed: true,
-          items: [
-            {
-              text: "Overview of mwc",
-              link: "/learn/mwc",
-            },
-            {
-              text: "Paying for blobspace",
-              link: "/learn/paying-for-blobspace",
-            },
-            {
-              text: "Staking, governance, & supply",
-              link: "/learn/staking-governance-supply",
-            },
-            {
-              text: "How to stake mwc",
-              link: "/learn/how-to-stake-mwc",
-            },
-            {
-              text: "Staking dashboards",
-              link: "/learn/staking",
-            },
-          ],
+          text: "Setting up Your Node",
+          link: "/node/setup",
+        },
+        {
+          text: "Commands",
+          link: "/node/setup",
         },
       ],
     },
@@ -541,7 +477,7 @@ function sidebarHome() {
         },
       ],
     },
-    {
+    /*{
       text: "Developers",
       collapsed: true,
       items: [
@@ -741,32 +677,6 @@ function sidebarHome() {
           link: "/developers/integrate-mwc",
         },
       ],
-    },
-    {
-      text: "Community",
-      collapsed: true,
-      items: [
-        { text: "Overview", link: "/community/overview" },
-        { text: "Code of Conduct", link: "/community/coc" },
-        { text: "Community calendar", link: "/community/calendar" },
-	{ text: "mwc Foundation Delegation Program", 
-	  link: "/community/foundation-delegation-program"
-	},
-        {
-          text: "Modular Meetups",
-          collapsed: true,
-          items: [
-            { text: "Overview", link: "/community/modular-meetup-intro" },
-            { text: "Guide", link: "/community/modular-meetup-guide" },
-            { text: "Toolkit", link: "/community/modular-meetup-toolkit" },
-            { text: "Speaker list", link: "/community/speaker-list" },
-          ],
-        },
-        {
-          text: "Incentivized testnet supplemental terms",
-          link: "/community/itn-tos",
-        },
-      ],
-    }
+    },*/
   ];
 }
