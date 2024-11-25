@@ -66,12 +66,12 @@ function nav() {
         {
           text: "Quick start",
           items: [
-            { text: "Nodes", link: "/node/overview" },
-            { text: "Wallet", link: "/wallet/overview" },
-            { text: "Miner", link: "/miner/overview" },
+            { text: "Nodes", link: "/node/introduction" },
+            { text: "Wallet", link: "/wallet/introduction" },
+            { text: "Miner", link: "/miner/introduction" },
           ],
         },
-        { text: "Learn", link: "/learn/how-mwc-works/overview" },
+        { text: "Learn", link: "/learn/introduction" },
         //{ text: "Networks", link: "/nodes/participate" },
         { text: "Developers", link: "/developers/build-modular" },
         { text: "Community", link: "/community/overview" },
@@ -94,12 +94,12 @@ function sidebarHome() {
           link: "/node/introduction",
         },
         {
-          text: "Setting up Your Node",
-          link: "/node/setup",
+          text: "Commands",
+          link: "/node/commands",
         },
         {
-          text: "Commands",
-          link: "/node/setup",
+          text: "API",
+          link: "/node/api",
         },
       ],
     },
@@ -267,7 +267,7 @@ function sidebarHome() {
                 }
               ]
             },
-            {
+            /*{
               text: "Advanced Features",
               collapsed: true,
               items: [
@@ -288,7 +288,7 @@ function sidebarHome() {
             {
               text: "FAQ",
               link: "/wallet/web/faq"
-            }
+            }**/
           ]
         },
         {
@@ -300,6 +300,14 @@ function sidebarHome() {
               link: "/wallet/console/get-started"
             },
             {
+              text: "Commands",
+              link: "/wallet/console/commands"
+            },
+            {
+              text: "API",
+              link: "/wallet/console/api"
+            }
+            /*{
               text: "Setting Up Your Wallet",
               collapsed: true,
               items: [
@@ -352,7 +360,7 @@ function sidebarHome() {
             {
               text: "FAQ",
               link: "/wallet/console/faq"
-            }
+            }*/
           ]
         },
         {
@@ -407,7 +415,7 @@ function sidebarHome() {
       text: "Miners",
       collapsed: true,
       items: [
-        {
+        /*{
           text: "Overview of mwc",
           collapsed: true,
           items: [
@@ -474,209 +482,84 @@ function sidebarHome() {
               link: "/learn/mwc",
             },
           ],
-        },
+        },*/
       ],
     },
-    /*{
+    {
       text: "Developers",
       collapsed: true,
       items: [
-        { text: "Build modular", link: "/developers/build-modular" },
         {
-          text: "Submitting data blobs to mwc",
-          link: "/developers/submit-data",
+          text: "Getting Started",
+          link: "/developers/get-started",
         },
         {
-          text: "Transaction resubmission guidelines",
-          link: "/developers/transaction-resubmission",
+          text: "Integration",
+          link: "/developers/integration",
         },
-        {
-          text: "Node API",
-          link: "/developers/node-api",
+        /*{
+          text: "Integration",
           collapsed: true,
           items: [
             {
-              text: "Node RPC CLI tutorial",
-              link: "/developers/node-tutorial",
+              text: "Getting Started",
+              link: "/developers/get-started",
             },
             {
-              text: "mwc-node RPC API documentation",
-              link: "https://node-rpc-docs.mwc.org/",
-            },
-            { text: "Prompt Scavenger", link: "/developers/prompt-scavenger" },
-          ],
-        },
-        {
-          text: "Integrate with Blobstream",
-          collapsed: true,
-          items: [
-            {
-              text: "Overview of Blobstream",
-              link: "/developers/blobstream",
-            },
-            {
-              text: "Integrate with Blobstream contracts",
-              link: "/developers/blobstream-contracts",
-            },
-            {
-              text: "Integrate with Blobstream client",
-              link: "/developers/blobstream-offchain",
-            },
-            {
-              text: "Querying the Blobstream proofs",
-              link: "/developers/blobstream-proof-queries",
-            },
-            {
-              text: "Local Blobstream X operators",
+              text: "Exchange",
               collapsed: true,
               items: [
-                {
-                  text: "Requesting data commitment ranges",
-                  link: "/developers/requesting-data-commitment-ranges",
-                },
-                {
-                  text: "New Blobstream X deployments",
-                  link: "/developers/blobstream-x-deploy",
-                },
+                { text: "Deposit", link: "/developers/integration/exchange/deposit" },
+                { text: "Withdrawal", link: "/developers/integration/exchange/withdrawal"},
               ],
             },
+            { text: "Mining Pool", link: "/developers/integration/mining-pool"},
           ],
-        },
+        },*/
         {
-          text: "Deploy a rollup",
-          link: "/developers/rollup-overview",
+          text: "API",
           collapsed: true,
           items: [
             {
-              text: "Ethereum L2s",
-              collapsed: true,
-              items: [
-                {
-                  text: "Ethereum fallback mechanism",
-                  link: "/developers/ethereum-fallback",
-                },
-                {
-                  text: "Arbitrum",
-                  collapsed: true,
-                  items: [
-                    {
-                      text: "Introduction to Arbitrum rollups with mwc as DA",
-                      link: "/developers/arbitrum-integration",
-                    },
-                    {
-                      text: "Deploy an Arbitrum rollup devnet",
-                      link: "/developers/arbitrum-deploy",
-                    },
-                    // {
-                    //   text: "Deploy an Arbitrum rollup to Mocha testnet",
-                    //   link: "/developers/arbitrum-mocha",
-                    // },
-                    {
-                      text: "Nitrogen testnet",
-                      link: "/developers/nitrogen",
-                    },
-                    {
-                      text: "Deploy a smart contract on Arbitrum rollup",
-                      link: "/developers/arbitrum-smart-contract",
-                    },
-                    {
-                      text: "Deploy a dapp on your Arbitrum rollup devnet",
-                      link: "/developers/arbitrum-dapp-deploy",
-                    },
-                  ],
-                },
-                {
-                  text: "Optimism",
-                  collapsed: true,
-                  items: [
-                    {
-                      text: "Intro to OP Stack integration",
-                      link: "/developers/intro-to-op-stack",
-                    },
-                    {
-                      text: "Bubs testnet",
-                      link: "/developers/bubs-testnet",
-                    },
-                    {
-                      text: "Deploy a smart contract on Bubs testnet",
-                      link: "/developers/deploy-on-bubs",
-                    },
-                    {
-                      text: "Deploy a dapp on Bubs testnet",
-                      link: "/developers/gm-portal-bubs",
-                    },
-                    {
-                      text: "Deploy an OP Stack devnet",
-                      link: "/developers/optimism-devnet",
-                    },
-                    {
-                      text: "Deploy an OP Stack devnet on mwc",
-                      link: "/developers/optimism",
-                    },
-                    {
-                      text: "Audit",
-                      link: "https://docs.mwc.org/mwc_OP_Stack_Audit.pdf",
-                    },
-                    {
-                      text: "Deploy a dapp with thirdweb",
-                      link: "https://thirdweb.com/bubs-testnet",
-                    },
-                    {
-                      text: "Rollups-as-a-Service",
-                      collapsed: true,
-                      items: [
-                        {
-                          text: "Caldera",
-                          link: "https://caldera.xyz/",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-            { text: "Rollkit", link: "/developers/rollkit" },
-            {
-              text: "Astria",
-              collapsed: true,
-              items: [
-                { text: "Documentation", link: "https://docs.astria.org" },
-                {
-                  text: "Deploy to Dusknet",
-                  link: "https://docs.astria.org/docs/dusknet/overview/",
-                },
-              ],
+              text: "Node",
+              link: "/developers/api/node",
             },
             {
-              text: "Sovereign SDK",
-              link: "https://github.com/Sovereign-Labs/sovereign-sdk/tree/stable/examples/demo-rollup#demo-rollup",
+              text: "Wallet",
+              link: "/developers/api/wallet",
             },
             {
-              text: "Vistara",
-              link: "https://docs.vistara.dev/",
-            },
-            {
-              text: "Dymension",
-              link: "https://dymension.xyz/",
+              text: "Stratum",
+              link: "/developers/api/stratum",
             },
           ],
-        },
-        {
-          text: "Wallets",
-          collapsed: true,
-          items: [
-            { text: "mwc-node", link: "/developers/mwc-node-key" },
-            {
-              text: "Integrating Wallets for developers",
-              link: "/developers/wallets",
-            },
-          ],
-        },
-        {
-          text: "Integrate mwc for service providers",
-          link: "/developers/integrate-mwc",
         },
       ],
-    },*/
+    },
+    {
+      text: "Learn",
+      collapsed: true,
+      items: [
+        {
+          text: "Integration",
+          collapsed: true,
+          items: [
+            {
+              text: "Getting Started",
+              link: "/developers/get-started",
+            },
+            {
+              text: "Exchange",
+              collapsed: true,
+              items: [
+                { text: "Deposit", link: "/developers/integration/exchange/deposit" },
+                { text: "Withdrawal", link: "/developers/integration/exchange/withdrawal"},
+              ],
+            },
+            { text: "Mining Pool", link: "/developers/integration/mining-pool"},
+          ],
+        },
+      ],
+    },
   ];
 }
