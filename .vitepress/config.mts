@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
+  ignoreDeadLinks: true,
   title: "MWC Documentations",
   description: "A VitePress Site",
   cleanUrls: true,
@@ -54,7 +55,7 @@ function nav() {
     {
       text: "Quick start",
       items: [
-        { text: "Nodes", link: "/nodes/introduction" },
+        { text: "Node", link: "/nodes/introduction" },
         { text: "Wallet", link: "/wallets/introduction" },
         { text: "Miners", link: "/miners/introduction" },
         { text: "Developers", link: "developers/get-started" },
@@ -112,6 +113,7 @@ function sidebarHome() {
           text: "Introduction",
           link: "/wallet/introduction"
         },
+          /*
         {
           text: "Desktop",
           collapsed: true,
@@ -268,7 +270,7 @@ function sidebarHome() {
                 }
               ]
             },
-            /*{
+            {
               text: "Advanced Features",
               collapsed: true,
               items: [
@@ -289,9 +291,9 @@ function sidebarHome() {
             {
               text: "FAQ",
               link: "/wallet/web/faq"
-            }**/
+            }
           ]
-        },
+        },*/
         {
           text: "Console",
           collapsed: true,
