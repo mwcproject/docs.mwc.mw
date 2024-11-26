@@ -7,32 +7,84 @@ The integration of the **MWC** into various systems or processes revolves around
 MWC transactions are inherently **interactive**, requiring communication between the sender and the recipient. At its core, the sender creates an initial slate (a transaction template), shares it with the recipient, and waits for the recipient to respond with an updated slate. This updated slate is then finalized and broadcast to the blockchain.
 x
 
-## Prerequisites
 
-Before you can successfully integrate the MWC Wallet workflows, certain prerequisites must be met. These prerequisites ensure that the necessary infrastructure and configurations are in place for seamless transactions.
-
-
-
-Ensure your MWC node is synced and running, and start the `mwc-wallet` listener in both Owner and Foreign modes to enable transaction handling and internal operations.
-
-- **Node:** Runs the blockchain backend and synchronizes the wallet with the network.
-- **Wallet:** Manages transaction operations, such as initiating, receiving, and finalizing slates.
-
-::: info
-The MWC Python SDK provides an efficient way to interact with the MWC Wallet API for handling transactions programmatically. It simplifies integration by offering methods for managing the Owner API and Foreign API, such as transaction creation, finalization, and querying wallet balances. Key features include:
-
-- **Owner API:** Internal wallet operations such as initiating and finalizing transactions, retrieving balances, and managing keys.
-- **Foreign API:** External interactions for receiving transactions.
-:::
 
 ## **Software Requirements**
-- **MWC Node Setup**
-  - A MWC node is required to synchronize with the blockchain.
-  - The wallet interacts with this node to validate and broadcast transactions.
-  - The node must be fully synced before conducting transactions.
 
-- **MWC Wallet Installation and Setup**
-  - Download and install the official [MWC Wallet](https://github.com/mwcproject/mwc-wallet) or the official GitHub repository.
+::: tip
+The MWC Python SDK simplifies interaction with the MWC Wallet API for managing transactions. It supports both the Owner API (transaction creation, finalization, balance retrieval) and Foreign API (receiving transactions).
+
+[MWC Python SDK Repository](https://github.com/mwcproject/mwcmw.py/tree/main) includes example workflows for Sender and Recipient in the `/examples` folder.
+:::
+
+### **1. MWC Node Setup**
+
+- **Purpose**: The MWC Node synchronizes with the blockchain and provides JSON-RPC APIs for interaction.
+- **Resources**:
+  - [Download from the source](https://github.com/mwcproject/mwc-node)
+  - [Build Instructions](https://github.com/mwcproject/mwc-node)
+  - [Documentation](https://github.com/mwcproject/mwc-node)
+
+- **Quick Start**:
+  - To run the node, simply execute:
+    ```bash
+    mwc
+    ```
+
+- **Listeners**:
+  - The node supports two APIs, both listening on `localhost:3413`:
+    - **Foreign API**:
+      - Available at: `http://localhost:3413/v2/foreign`.
+      - Supports only `POST` operations, with the JSON-RPC request as the body.
+      - Refer to the [Foreign API Documentation](https://docs.rs/mwc_api/latest/mwc_api/foreign_rpc/trait.ForeignRpc.html) for detailed usage.
+    - **Owner API**:
+      - Available at: `http://localhost:3413/v2/owner`.
+      - Supports only `POST` operations, with the JSON-RPC request as the body.
+      - Refer to the [Owner API Documentation](https://docs.rs/mwc_api/latest/mwc_api/owner_rpc/trait.OwnerRpc.html) for detailed usage.
+
+- **Critical Setup**:
+  - Ensure the node is **fully synchronized** with the blockchain before performing any transactions.
+
+---
+
+### **2. MWC Wallet Installation and Setup**
+
+- **Purpose**: The MWC Wallet handles all transaction operations, including creating, receiving, and finalizing transaction slates.
+- **Resources**:
+  - [Download from the source](https://github.com/mwcproject/mwc-wallet)
+  - [Build Instructions](https://github.com/mwcproject/mwc-wallet)
+  - [Documentation](https://github.com/mwcproject/mwc-wallet)
+
+- **Quick Start**:
+  - **Owner API**:
+    - Publicly accessible definition used to generate the Owner JSON-RPC API.
+    - Start the Owner API by running:
+      ```bash
+      mwc-wallet owner_api
+      ```
+    - Available at: `http://localhost:3420/v2/owner`.
+    - Supports only `POST` operations, with the JSON-RPC request as the body.
+    - Refer to the [Owner API Documentation](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.OwnerRpcV3.html) for detailed usage.
+  - **Foreign API**:
+    - Publicly accessible definition used to generate the Foreign JSON-RPC API.
+    - Start the Foreign API by running:
+      ```bash
+      mwc-wallet listen
+      ```
+    - Available at: `http://localhost:3415/v2/foreign`.
+    - Supports only `POST` operations, with the JSON-RPC request as the body.
+    - Refer to the [Foreign API Documentation](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.ForeignRpc.html) for detailed usage.
+
+::: info 
+Ensure that the correct API mode is running based on your role in the transaction process.
+:::
+
+- **Operational Modes**:
+  - **If You Are the Sender**: Use the Owner API to manage and send transactions.
+  - **If You Are the Recipient**: Use the Foreign API to handle incoming transaction slates.
+
+
+
 
 
 
