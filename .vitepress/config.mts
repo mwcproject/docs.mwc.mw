@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   ignoreDeadLinks: true,
   title: "MWC Documentations",
-  description: "A VitePress Site",
+  description: "Comprehensive documentation for the node, wallet, miner, developers, and learning about MWC.",
   cleanUrls: true,
   lastUpdated: true,
   head: [
