@@ -54,13 +54,14 @@ function nav() {
     {
       text: "Quick start",
       items: [
-        { text: "Nodes", link: "/nodes/overview" },
-        { text: "Wallet", link: "/nodes/overview" },
-        { text: "Miners", link: "/miners/overview" },
+        { text: "Nodes", link: "/nodes/introduction" },
+        { text: "Wallet", link: "/wallets/introduction" },
+        { text: "Miners", link: "/miners/introduction" },
+        { text: "Developers", link: "developers/get-started" },
         
       ],
     },
-    {
+    /*{
       text: "Join the network",
       items: [
         {
@@ -77,7 +78,7 @@ function nav() {
         { text: "Community", link: "/community/overview" },
         
       ],
-    },
+    },*/
   ];
 }
 
@@ -540,7 +541,7 @@ function sidebarHome() {
       text: "Learn",
       collapsed: true,
       items: [
-        {
+        /*{
           text: "Integration",
           collapsed: true,
           items: [
@@ -558,7 +559,7 @@ function sidebarHome() {
             },
             { text: "Mining Pool", link: "/developers/integration/mining-pool"},
           ],
-        },
+        },*/
       ],
     },
   ];
