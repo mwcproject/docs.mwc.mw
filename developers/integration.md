@@ -62,7 +62,7 @@ The MWC Python SDK simplifies interaction with the MWC Wallet API for managing t
       ```bash
       mwc-wallet owner_api
       ```
-    - Available at: `http://localhost:3420/v2/owner`.
+    - Available at: `http://localhost:3420/v3/owner`.
     - Supports only `POST` operations, with the JSON-RPC request as the body.
     - Refer to the [Owner API Documentation](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.OwnerRpcV3.html) for detailed usage.
   - **Foreign API**:
