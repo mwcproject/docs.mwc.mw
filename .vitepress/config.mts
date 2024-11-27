@@ -96,6 +96,10 @@ function sidebarHome() {
           link: "/node/introduction",
         },
         {
+          text: "Build",
+          link: "/node/build",
+        },
+        {
           text: "Commands",
           link: "/node/commands",
         },

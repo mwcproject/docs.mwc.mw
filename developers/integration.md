@@ -369,7 +369,7 @@ BEGINSLATE_BIN. oqubcv5dAuwDxnH mWc3UHM1JLj5XFd uv8qHNDgFzjpYFG zafDB1dptWRpYzq 
 
 
 ### Step 6: Finalize the Transaction
-The sender finalizes the transaction by combining all signatures and preparing the transaction for broadcast using the [finalize_tx]() method (HTTP POST).
+The sender finalizes the transaction by combining all signatures and preparing the transaction for broadcast using the [finalize_tx](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.OwnerRpcV3.html#tymethod.finalize_tx) method.
 
 `finalize_tx` <Badge type="info" text="POST" />
 ::: details Request Example
@@ -400,7 +400,7 @@ The sender finalizes the transaction by combining all signatures and preparing t
 
 ### Step 7: Decode the Finalized Slate
 
-Once the transaction is finalized, the next step is to decode the finalized Slatepack. Decoding reveals the transaction details necessary for broadcasting to the node and logging. The decoded slate includes critical information such as inputs, outputs, transaction kernels, and the offset value. Specifically, you need to extract the `slate.tx` object, which represents the finalized transaction. 
+Once the transaction is finalized, the next step is to decode the finalized Slatepack. Decoding reveals the transaction details necessary for broadcasting to the node and logging. The decoded slate includes critical information such as inputs, outputs, transaction kernels, and the offset value. Specifically, you need to extract the `slate.tx` object, which represents the finalized transaction. You can use the [decode_slatepack_message](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.OwnerRpcV3.html#tymethod.decode_slatepack_message) method.
 
 `decode_slatepack_message` <Badge type="info" text="POST" />
 
@@ -519,7 +519,7 @@ Once the transaction is finalized, the next step is to decode the finalized Slat
 
 Once the finalized slate has been decoded, extract the `slate.tx` object from the decoded slate. This object contains the transaction details, including inputs, outputs, kernels, and the offset. These details must be used as parameters in the broadcast request to the node.
 
-The `post_tx` method is then called to broadcast the transaction. This step sends the finalized transaction to the node, allowing it to propagate across the MWC network. Ensure the tx parameter extracted from the decoded slate is correctly included in the request. 
+The [post_tx](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.OwnerRpcV3.html#tymethod.post_tx) method is then called to broadcast the transaction. This step sends the finalized transaction to the node, allowing it to propagate across the MWC network. Ensure the tx parameter extracted from the decoded slate is correctly included in the request. 
 
 `post_tx` <Badge type="info" text="POST" />
 
@@ -631,7 +631,13 @@ The recipient receives the initial Slatepack from the sender. This Slatepack con
 BEGINSLATE_BIN. 62GzuKRdyEXA7NS j9ZVB7tYCXotthS ZsjFZkRCmorDE1E LhTdCkxG1RP6A9U HaV64mMmLVcZur2 nyUiJGF4CcpwzGb qUy3uWgP2mp6H2p oXGd4w7GDYTubC2 1fkbtcpbThkSY9p Uw. ENDSLATE_BIN.
 ```
 
-Optional:
+#### **Optional: Decode the Slatepack**
+Before processing, the recipient can optionally decode the Slatepack to extract its content using the [decode_slatepack_message](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.OwnerRpcV3.html#tymethod.decode_slatepack_message) method.
+
+
+
+`decode_slatepack_message` <Badge type="info" text="POST" />
+
 ::: details Request Example
 ```json
 {
@@ -710,7 +716,7 @@ Optional:
 
 After processing the initial slate, the recipient updates the slate with their signature and transaction details. This updated slate is encoded into a **response Slatepack**. 
 
-The recipient processes the slate using the `receive_tx` method.
+The recipient processes the slate using the [receive_tx](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.ForeignRpc.html#tymethod.receive_tx) method.
 
 
 `receive_tx` <Badge type="info" text="POST" />
