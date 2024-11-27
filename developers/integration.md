@@ -1,20 +1,22 @@
 # Integration
 
-The integration of the **MWC** into various systems or processes revolves around two core workflows: **Send** and **Receive**. These workflows ensure smooth, privacy-focused, and efficient transactions within the MWC ecosystem. 
+The integration of the **MWC** revolves around two core workflows: **Send** and **Receive**. These workflows ensure smooth, privacy-focused, and efficient transactions. 
 
 ### **Understanding the Interactive Process**
 
-MWC transactions are inherently **interactive**, requiring communication between the sender and the recipient. At its core, the sender creates an initial slate (a transaction template), shares it with the recipient, and waits for the recipient to respond with an updated slate. This updated slate is then finalized and broadcast to the blockchain.
-x
-
+MWC transactions are inherently **interactive**, requiring communication between the sender and the recipient. At its core, the sender creates an initial slate (a transaction template), shares it with the recipient, and waits for the recipient to respond with an updated slate. This updated slate is then finalized and broadcast to the blockchain by the sender.
 
 
 ## **Software Requirements**
 
 ::: tip
-The MWC Python SDK simplifies interaction with the MWC Wallet API for managing transactions. It supports both the Owner API (transaction creation, finalization, balance retrieval) and Foreign API (receiving transactions).
+The [MWC Python SDK](https://github.com/mwcproject/mwcmw.py/tree/main) supports both Wallet and Node APIs, including their respective Owner and Foreign APIs:
 
-[MWC Python SDK Repository](https://github.com/mwcproject/mwcmw.py/tree/main) includes example workflows for Sender and Recipient in the `/examples` folder.
+Wallet Owner API: Handles transaction creation, finalization, balance retrieval, and key management.
+Wallet Foreign API: Facilitates receiving transactions and external interactions.
+Node Owner API: Provides control over the node, including querying blockchain data.
+Node Foreign API: Allows external interactions with the node for transaction broadcasting and retrieval.
+Examples for Sender and Recipient workflows are in the /examples folder.
 :::
 
 ### **1. MWC Node Setup**
@@ -37,10 +39,16 @@ The MWC Python SDK simplifies interaction with the MWC Wallet API for managing t
       - Available at: `http://localhost:3413/v2/foreign`.
       - Supports only `POST` operations, with the JSON-RPC request as the body.
       - Refer to the [Foreign API Documentation](https://docs.rs/mwc_api/latest/mwc_api/foreign_rpc/trait.ForeignRpc.html) for detailed usage.
+      - Basic Authentification:
+        - Username: `mwcmain`
+        - Password: `~/.mwc/main/.foreign_api_secret`
     - **Owner API**:
       - Available at: `http://localhost:3413/v2/owner`.
       - Supports only `POST` operations, with the JSON-RPC request as the body.
       - Refer to the [Owner API Documentation](https://docs.rs/mwc_api/latest/mwc_api/owner_rpc/trait.OwnerRpc.html) for detailed usage.
+      - Basic Authentification:
+        - Username: `mwcmain`
+        - Password: `~/.mwc/main/.api_secret`
 
 - **Critical Setup**:
   - Ensure the node is **fully synchronized** with the blockchain before performing any transactions.
@@ -65,6 +73,9 @@ The MWC Python SDK simplifies interaction with the MWC Wallet API for managing t
     - Available at: `http://localhost:3420/v3/owner`.
     - Supports only `POST` operations, with the JSON-RPC request as the body.
     - Refer to the [Owner API Documentation](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.OwnerRpcV3.html) for detailed usage.
+    - Basic Authentification:
+      - Username: `mwc`
+      - Password: `~/.mwc/main/.owner_api_secret`
   - **Foreign API**:
     - Publicly accessible definition used to generate the Foreign JSON-RPC API.
     - Start the Foreign API by running:
@@ -74,6 +85,7 @@ The MWC Python SDK simplifies interaction with the MWC Wallet API for managing t
     - Available at: `http://localhost:3415/v2/foreign`.
     - Supports only `POST` operations, with the JSON-RPC request as the body.
     - Refer to the [Foreign API Documentation](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.ForeignRpc.html) for detailed usage.
+    
 
 ::: info 
 Ensure that the correct API mode is running based on your role in the transaction process.
