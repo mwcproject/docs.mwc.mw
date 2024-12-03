@@ -12,11 +12,12 @@ MWC transactions are inherently **interactive**, requiring communication between
 ::: tip
 The [MWC Python SDK](https://github.com/mwcproject/mwcmw.py/tree/main) supports both Wallet and Node APIs, including their respective Owner and Foreign APIs:
 
-Wallet Owner API: Handles transaction creation, finalization, balance retrieval, and key management.
-Wallet Foreign API: Facilitates receiving transactions and external interactions.
-Node Owner API: Provides control over the node, including querying blockchain data.
-Node Foreign API: Allows external interactions with the node for transaction broadcasting and retrieval.
-Examples for Sender and Recipient workflows are in the /examples folder.
+- Wallet Owner API: Handles transaction creation, finalization, balance retrieval, and key management.  
+- Wallet Foreign API: Facilitates receiving transactions and external interactions.  
+- Node Owner API: Provides control over the node, including querying blockchain data.
+- Node Foreign API: Allows external interactions with the node for transaction broadcasting and retrieval.
+
+Examples for Sender and Recipient workflows are in the `/examples` folder.
 :::
 
 ### **1. MWC Node Setup**
