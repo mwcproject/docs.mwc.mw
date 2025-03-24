@@ -17,4 +17,4 @@ The [wallet API](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/) uses JSO
 
 
 * [Foreign API](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/struct.Foreign.html)
-  - URL: `localhost:3420/v2/foreign`
+  - URL: `localhost:3415/v2/foreign`

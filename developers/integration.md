@@ -121,6 +121,8 @@ The sender creates a transaction slate by calling the method [init_send_tx](http
 | `num_change_outputs`         | Integer  | Number of change outputs (e.g., `1`).                                   |
 | `selection_strategy_is_use_all` | Boolean | Whether to use all available inputs (`true` or `false`).                |
 | `target_slate_version`       | Integer  | Slate version to use (e.g., `4`).                                       |
+| `public_key`       | string  | Slatepack Recipient Address in the field                                       |
+| `late_lock`       | Boolean  | Enable Late lock to lock the input at the finalization step    (`true`)                                 |
 
 
 ::: details Request Example
@@ -139,9 +141,15 @@ The sender creates a transaction slate by calling the method [init_send_tx](http
       "num_change_outputs": 1,
       "selection_strategy_is_use_all": false,
       "target_slate_version": 4,
+      "late_lock": true,
       "payment_proof_recipient_address": null,
       "ttl_blocks": null,
-      "send_args": null
+      "send_args": null, 
+      "slatepack_recipient": {
+        "public_key": "4viaavr3hgyl26zqwwux4zsvairvqrbzfef7ih7tyk3a3jheqselndqd",
+        "domain": null,
+        "port": null,
+      }
     }
   }
 }
@@ -229,8 +237,8 @@ The transaction slate is encoded into a Slatepack message for sharing with the r
 | `token`         | String  | API token for authentication.                                         |
 | `slate`         | Object  | The slate object returned from `init_send_tx`.                        |
 | `content`       | String  | The content type of the Slatepack (e.g., `SendInitial`).              |
-| `recipient`     | String  | Optional. Recipient’s address for payment proof (if required).        |
-| `address_index` | Integer | Optional. Index of the sender's address for the Slatepack.            |
+| `recipient`     | String  | Recipient’s Slatepack address.        |
+| `address_index` | Integer | Optional. Index of the sender's address for the Slatepack.  ('null')          |
 
 ---
 ::: details Request Example
@@ -301,7 +309,11 @@ The transaction slate is encoded into a Slatepack message for sharing with the r
       }
     },
     "content": "SendInitial",
-    "recipient": null,
+    "recipient":{
+        "public_key": "4viaavr3hgyl26zqwwux4zsvairvqrbzfef7ih7tyk3a3jheqselndqd",
+        "domain": null,
+        "port": null,
+    },
     "address_index": 0
   }
 }
@@ -319,47 +331,6 @@ The transaction slate is encoded into a Slatepack message for sharing with the r
 }
 ```
 :::   
-
-
-### **Step 3: Lock Outputs**
-
-The sender ensures the outputs for the transaction are locked using [tx_lock_outputs](https://docs.rs/mwc_wallet_api/5.3.4/mwc_wallet_api/trait.OwnerRpcV3.html#tymethod.tx_lock_outputs).
-
-`tx_lock_outputs` <Badge type="info" text="POST" />
-
-| Parameter         | Type   | Description                                                       |
-|-------------------|--------|-------------------------------------------------------------------|
-| `token`           | String | API token for authentication.                                    |
-| `slate`           | String | Encoded Slatepack message from `encode_slatepack_message`.       |
-| `participant_id`  | Integer | ID of the participant locking the funds (typically `0` for sender). |
-
-
-::: details Request Example
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "tx_lock_outputs",
-  "params": {
-    "token": "f97e6cfd63b5332ef40e91203458058ef68c7646ab0f4d0f419cdcd5056f74e9",
-    "slate": "BEGINSLATE_BIN. 62GzuKRdyEXA7NS j9ZVB7tYCXotthS ZsjFZkRCmorDE1E LhTdCkxG1RP6A9U HaV64mMmLVcZur2 nyUiJGF4CcpwzGb qUy3uWgP2mp6H2p oXGd4w7GDYTubC2 1fkbtcpbThkSY9p Uw. ENDSLATE_BIN.",
-    "participant_id": 0
-  }
-}
-```
-:::
-
-::: details Ok Response
-```json
-{
-	"jsonrpc": "2.0",
-	"id": 1,
-	"result": {
-		"Ok": null
-	}
-}
-```
-:::
 
 
 ### **Step 4: Sending the Initial Slatepack to the User**
