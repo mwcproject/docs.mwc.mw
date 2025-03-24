@@ -293,7 +293,7 @@ The transaction slate is encoded into a Slatepack message for sharing with the r
 :::   
 
 
-### **Step 4: Sending the Initial Slatepack to the User**
+### **Step 3: Sending the Initial Slatepack to the User**
 After creating and encoding the initial slate, you must share the slatepack with the recipient. Typically, this is done through a secure channel, such as a file, email, or a messaging service.
 
 **Example Slatepack to Share with the Recipient:**
@@ -302,7 +302,7 @@ After creating and encoding the initial slate, you must share the slatepack with
 BEGINSLATEPACK. KbRGFBmJFBg5qWg k9Fi7EttkQKZ5pp L4mYHzzCfWw7Anf V8CZ6Ke1bkv3HxH XtrFoycTQ5FgC3p VZZpUiHVDXSXmKD wQJJHpKXZyqL66f bAs8CWvTPZoquaB Azd6XQVqeMRiape dmqpmhPUYE3f4Yr DQNLi9dzSPLU8c3 NT9frEz4oA2GaGB XsbFXqgsVgHeED5 f7859HKg8RVHQCn bC7dGVk3GnZKPA3 ejGahpUud7odiJi WJgThiYTwR7YdZg 9oyH21VCwoNMsar P1. ENDSLATEPACK.
 ```
 
-### Step 5: Waiting for the Recipient's Response
+### Step 4: Waiting for the Recipient's Response
 Once the recipient receives the initial slatepack, they will process it on their side using their wallet. After signing and updating the slate, the recipient will generate a response slatepack and send it back to you.
 
 **Example Response Slatepack:**
@@ -312,7 +312,7 @@ BEGINSLATEPACK. 2t5mcXih1Sfx51S CH9rhDbtfhuV4ih apEUin14ZMSAZ8r W2ZnELPJzPCADDa 
 
 
 
-### Step 6: Finalize the Transaction
+### Step 5: Finalize the Transaction
 The sender finalizes the transaction by combining all signatures and preparing the transaction for broadcast using the [finalize_tx](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.OwnerRpcV3.html#tymethod.finalize_tx) method.
 
 `finalize_tx` <Badge type="info" text="POST" />
@@ -342,7 +342,7 @@ The sender finalizes the transaction by combining all signatures and preparing t
 ```
 :::
 
-### Step 7: Decode the Finalized Slate
+### Step 6: Decode the Finalized Slate
 
 Once the transaction is finalized, the next step is to decode the finalized Slatepack. Decoding reveals the transaction details necessary for broadcasting to the node and logging. The decoded slate includes critical information such as inputs, outputs, transaction kernels, and the offset value. Specifically, you need to extract the `slate.tx` object, which represents the finalized transaction. You can use the [decode_slatepack_message](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.OwnerRpcV3.html#tymethod.decode_slatepack_message) method.
 
@@ -467,7 +467,7 @@ Once the transaction is finalized, the next step is to decode the finalized Slat
 
 
 
-### Step 8: Broadcast it to the node 
+### Step 7: Broadcast it to the node 
 
 Once the finalized slate has been decoded, extract the `slate.tx` object from the decoded slate. This object contains the transaction details, including inputs, outputs, kernels, and the offset. These details must be used as parameters in the broadcast request to the node.
 
@@ -551,13 +551,12 @@ The sender workflow for an **MWC interactive transaction** involves these key st
 
 1. **Initiate Transaction**: Begin creating the transaction.
 2. **Encode Slatepack**: Convert the transaction into a shareable slatepack.
-3. **Lock Outputs**: Lock the necessary funds for the transaction.
-4. **Send Initial Slatepack**: Share the slatepack with the recipient.
-5. **Wait for Recipient Response**: Await the recipient's signed slatepack.
-6. **Finalize the Transaction**: Complete the transaction process.
-7. **Decode the Finalized Slate**: Interpret the finalized slate.
-8. **Broadcast to the Network**: Send the transaction to the network for propagation.
-9. **Track Confirmation**: Monitor the transaction until confirmed on the blockchain.
+3. **Send Initial Slatepack**: Share the slatepack with the recipient.
+4. **Wait for Recipient Response**: Await the recipient's signed slatepack.
+5. **Finalize the Transaction**: Complete the transaction process.
+6. **Decode the Finalized Slate**: Interpret the finalized slate.
+7. **Broadcast to the Network**: Send the transaction to the network for propagation.
+8. **Track Confirmation**: Monitor the transaction until confirmed on the blockchain.
 
 ## Recipient Workflow
 
