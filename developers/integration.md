@@ -104,7 +104,12 @@ Ensure that the correct API mode is running based on your role in the transactio
 
 ## Sender Workflow
 
-The **Sender Workflow** is responsible for initiating, encoding, and finalizing the transaction. For developers integrating MWC workflows, it's important to understand the interactive nature of the transaction process. Once you generate the initial slatepack, you need to send it to the user (recipient) and wait for their response slatepack to proceed further.
+The Sender Workflow is responsible for initiating, encoding, and finalizing the transaction. For developers integrating MWC workflows, it's important to understand the interactive nature of the transaction process. Once you generate the initial Slatepack, you need to send it to the user (recipient) and wait for their response Slatepack to proceed further.
+
+Here, we send the **Slatepack to the recipient's address**:
+``` Slatepack Recipient Address
+grxdcrjcvdq7aipjzuejjngr3til7euryqrpmtjg4hdqxnx3jyfst2qd
+```
 
 ### **Step 1: Initiate Transaction**
 
@@ -115,14 +120,15 @@ The sender creates a transaction slate by calling the method [init_send_tx](http
 | Parameter                    | Type     | Description                                                              |
 |------------------------------|----------|--------------------------------------------------------------------------|
 | `token`                      | String   | API token for authentication.                                           |
-| `amount`                     | Integer  | Amount to send in micro-MWC (e.g., `500000000` for 0.5 MWC).            |
-| `minimum_confirmations`      | Integer  | Minimum confirmations for inputs (e.g., `500`).                         |
+| `amount`                     | Integer  | Amount to send in micro-MWC (e.g., `200000000` for 0.2 MWC).            |
+| `minimum_confirmations`      | Integer  | Minimum confirmations for inputs (e.g., `10`).                         |
 | `max_outputs`                | Integer  | Maximum outputs to use (e.g., `500`).                                   |
 | `num_change_outputs`         | Integer  | Number of change outputs (e.g., `1`).                                   |
 | `selection_strategy_is_use_all` | Boolean | Whether to use all available inputs (`true` or `false`).                |
 | `target_slate_version`       | Integer  | Slate version to use (e.g., `4`).                                       |
-| `public_key`       | string  | Slatepack Recipient Address in the field                                       |
-| `late_lock`       | Boolean  | Enable Late lock to lock the input at the finalization step    (`true`)                                 |
+| `public_key`       | string  | Slatepack Recipient Address in the field                                   |
+| `late_lock`       | Boolean  | Enable Late lock to lock the input at the finalization step    (`true`)    |    
+| `ttl_blocks`       | Integerer  | Block when the transaction will auto-cancel                          |
 
 
 ::: details Request Example
@@ -132,23 +138,23 @@ The sender creates a transaction slate by calling the method [init_send_tx](http
   "id": 1,
   "method": "init_send_tx",
   "params": {
-    "token": "f97e6cfd63b5332ef40e91203458058ef68c7646ab0f4d0f419cdcd5056f74e9",
+    "token": "ddab9a3b96d73d3539d4e6fc15f69637888425e440d928771aeb7dac4157b8d1",
     "args": {
       "src_acct_name": null,
-      "amount": 500000000,
+      "amount": 200000000,
       "minimum_confirmations": 10,
       "max_outputs": 500,
       "num_change_outputs": 1,
       "selection_strategy_is_use_all": false,
       "target_slate_version": 4,
-      "late_lock": true,
       "payment_proof_recipient_address": null,
-      "ttl_blocks": null,
-      "send_args": null, 
+      "ttl_blocks": 1440,
+      "send_args": null,
+      "late_lock": true,
       "slatepack_recipient": {
-        "public_key": "4viaavr3hgyl26zqwwux4zsvairvqrbzfef7ih7tyk3a3jheqselndqd",
-        "domain": null,
-        "port": null,
+        "public_key": "grxdcrjcvdq7aipjzuejjngr3til7euryqrpmtjg4hdqxnx3jyfst2qd",
+        "domain": "",
+        "port": null
       }
     }
   }
@@ -162,12 +168,12 @@ The sender creates a transaction slate by calling the method [init_send_tx](http
   "jsonrpc": "2.0",
   "result": {
     "Ok": {
-      "amount": "500000000",
+      "amount": "200000000",
       "coin_type": "mwc",
       "compact_slate": true,
       "fee": "7000000",
-      "height": "2623963",
-      "id": "17478843-f5d5-4c6b-8b31-a824969d8461",
+      "height": "2793169",
+      "id": "e2757000-4a03-47f9-b6fe-ed91dc2ceb9f",
       "lock_height": "0",
       "network_type": "mainnet",
       "num_participants": 2,
@@ -177,40 +183,17 @@ The sender creates a transaction slate by calling the method [init_send_tx](http
           "message": null,
           "message_sig": null,
           "part_sig": null,
-          "public_blind_excess": "02da83f0564f1fd3f286081cc1b456b9829e391b9342a66a66da7477902ce5181c",
-          "public_nonce": "03dcf7dd591c90e431374c27e75ebc1a2eb94fcf758f2789104b7b4b2500411bab"
+          "public_blind_excess": "028d440ffa605a04cc92ca9e77b6be3295042fdc088b12565c73ae3bb4c7fbabae",
+          "public_nonce": "0309338aec074b65e82e6077aab0e5a9b052df9948207e047bbedca1477f17a6cd"
         }
       ],
       "payment_proof": null,
-      "ttl_cutoff_height": null,
+      "ttl_cutoff_height": "2794609",
       "tx": {
         "body": {
-          "inputs": [
-            {
-              "commit": "09fa0929c293e230f8f2b93912eeb922f7531b48ae70c0866cde0122126ad023af",
-              "features": "Plain"
-            },
-            {
-              "commit": "08c189605f542625b0e35eebe1bfe491f3a7ff3a5e05984a62715342a361d13103",
-              "features": "Plain"
-            }
-          ],
-          "kernels": [
-            {
-              "excess": "000000000000000000000000000000000000000000000000000000000000000000",
-              "excess_sig": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-              "features": "Plain",
-              "fee": "7000000",
-              "lock_height": "0"
-            }
-          ],
-          "outputs": [
-            {
-              "commit": "08b4604d29b8e6b1fdca342250fd14a32bba6eeaf364af7f3f406a3f2f58ebd0aa",
-              "features": "Plain",
-              "proof": "2c06ef1a38fc7adefdd7ea0143d3b0207d12f42c92e13096d9c00ff3ebe6a4d92c5c6fc7f81e8cf23c6bf2d53e8aba121396f8ae3fd382d7d0867b2dd50f054b05b1bff3c62c058df4d51faa711d49f38840b7622104c0ae60c3edcdc4bc39d09c5d7686ee9ce6fda121e29ae629bb7c5502cb984bf1ef28b08ae553258ddb71f69a9a794a2fe1c396a38fe070e667fec5f247b20e2d9e87ebe8a9a1f180b789ba84d37148f93eb3a86e683b515eaac6e5a82f96d72382d6b2368441ff84d68f7f47a94dfed470fb06e7beba563fe33d791951cf8dc6ecb2e1581e4ecfb587752f8ca95ad147c3f1e734126659d02495dfeec5dea757f73f63bf7c0d9af01cabb1e7a9988788a9685def7d707d59c104ee3dcab5e52563b8b934fa649d3d9750f879ac503b4e8a5ad2592ef7b29b42ef5d2d96b35d5c549a8ae8bf8485e9fda22cee277ece54529fb2deb552f2bd3ed59da9268f3f6314a57c7c2885de83713b124301fe22f6ced46ffae9fabbc6be8bca10a2438d66d816e8a1a20f3b4967045d3b49489a0eae85cba4cf8123d233e916ad01720e2ada319eba980b6d9a9e67cc4c8d049efdc0cfd6fa16d2f0535113ba7f0fb401b6cffd35b97248acbc9148d81c575413274125aca3b6418a9b01d1c7c9387a47d510b9fa2903e1edcf9b973fcd1cb3fa43fdb1330d7c175c6509d560592c26d0e556e6de69f39dadb86297634eed7ce238035a846f2754200abec6289dabc3ca19bcd01610061c0d211b75f7c4f4905bf81f04a2d981bc75eb8c4c651eb7ded10d64dec78474f103d2dd6673e6ed30daf9ab927de0c9468975d631810603c1f8b81093be88a6a508c6d6d4c18e7321ee20f55cd865d29d67157383662f87ad190e9bcbbcf854a5bcaf60687450b296afc0259739fce91bae74b8ba52a5ef0a7b32e5d84b29dbcb027c5f9687ad03"
-            }
-          ]
+          "inputs": [],
+          "kernels": [],
+          "outputs": []
         },
         "offset": "0000000000000000000000000000000000000000000000000000000000000000"
       },
@@ -248,14 +231,14 @@ The transaction slate is encoded into a Slatepack message for sharing with the r
   "id": 1,
   "method": "encode_slatepack_message",
   "params": {
-    "token": "f97e6cfd63b5332ef40e91203458058ef68c7646ab0f4d0f419cdcd5056f74e9",
+    "token": "ddab9a3b96d73d3539d4e6fc15f69637888425e440d928771aeb7dac4157b8d1",
     "slate": {
-      "amount": "500000000",
+      "amount": "200000000",
       "coin_type": "mwc",
       "compact_slate": true,
       "fee": "7000000",
-      "height": "2623963",
-      "id": "17478843-f5d5-4c6b-8b31-a824969d8461",
+      "height": "2793169",
+      "id": "e2757000-4a03-47f9-b6fe-ed91dc2ceb9f",
       "lock_height": "0",
       "network_type": "mainnet",
       "num_participants": 2,
@@ -265,40 +248,17 @@ The transaction slate is encoded into a Slatepack message for sharing with the r
           "message": null,
           "message_sig": null,
           "part_sig": null,
-          "public_blind_excess": "02da83f0564f1fd3f286081cc1b456b9829e391b9342a66a66da7477902ce5181c",
-          "public_nonce": "03dcf7dd591c90e431374c27e75ebc1a2eb94fcf758f2789104b7b4b2500411bab"
+          "public_blind_excess": "028d440ffa605a04cc92ca9e77b6be3295042fdc088b12565c73ae3bb4c7fbabae",
+          "public_nonce": "0309338aec074b65e82e6077aab0e5a9b052df9948207e047bbedca1477f17a6cd"
         }
       ],
       "payment_proof": null,
-      "ttl_cutoff_height": null,
+      "ttl_cutoff_height": "2794609",
       "tx": {
         "body": {
-          "inputs": [
-            {
-              "commit": "09fa0929c293e230f8f2b93912eeb922f7531b48ae70c0866cde0122126ad023af",
-              "features": "Plain"
-            },
-            {
-              "commit": "08c189605f542625b0e35eebe1bfe491f3a7ff3a5e05984a62715342a361d13103",
-              "features": "Plain"
-            }
-          ],
-          "kernels": [
-            {
-              "excess": "000000000000000000000000000000000000000000000000000000000000000000",
-              "excess_sig": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-              "features": "Plain",
-              "fee": "7000000",
-              "lock_height": "0"
-            }
-          ],
-          "outputs": [
-            {
-              "commit": "08b4604d29b8e6b1fdca342250fd14a32bba6eeaf364af7f3f406a3f2f58ebd0aa",
-              "features": "Plain",
-              "proof": "2c06ef1a38fc7adefdd7ea0143d3b0207d12f42c92e13096d9c00ff3ebe6a4d92c5c6fc7f81e8cf23c6bf2d53e8aba121396f8ae3fd382d7d0867b2dd50f054b05b1bff3c62c058df4d51faa711d49f38840b7622104c0ae60c3edcdc4bc39d09c5d7686ee9ce6fda121e29ae629bb7c5502cb984bf1ef28b08ae553258ddb71f69a9a794a2fe1c396a38fe070e667fec5f247b20e2d9e87ebe8a9a1f180b789ba84d37148f93eb3a86e683b515eaac6e5a82f96d72382d6b2368441ff84d68f7f47a94dfed470fb06e7beba563fe33d791951cf8dc6ecb2e1581e4ecfb587752f8ca95ad147c3f1e734126659d02495dfeec5dea757f73f63bf7c0d9af01cabb1e7a9988788a9685def7d707d59c104ee3dcab5e52563b8b934fa649d3d9750f879ac503b4e8a5ad2592ef7b29b42ef5d2d96b35d5c549a8ae8bf8485e9fda22cee277ece54529fb2deb552f2bd3ed59da9268f3f6314a57c7c2885de83713b124301fe22f6ced46ffae9fabbc6be8bca10a2438d66d816e8a1a20f3b4967045d3b49489a0eae85cba4cf8123d233e916ad01720e2ada319eba980b6d9a9e67cc4c8d049efdc0cfd6fa16d2f0535113ba7f0fb401b6cffd35b97248acbc9148d81c575413274125aca3b6418a9b01d1c7c9387a47d510b9fa2903e1edcf9b973fcd1cb3fa43fdb1330d7c175c6509d560592c26d0e556e6de69f39dadb86297634eed7ce238035a846f2754200abec6289dabc3ca19bcd01610061c0d211b75f7c4f4905bf81f04a2d981bc75eb8c4c651eb7ded10d64dec78474f103d2dd6673e6ed30daf9ab927de0c9468975d631810603c1f8b81093be88a6a508c6d6d4c18e7321ee20f55cd865d29d67157383662f87ad190e9bcbbcf854a5bcaf60687450b296afc0259739fce91bae74b8ba52a5ef0a7b32e5d84b29dbcb027c5f9687ad03"
-            }
-          ]
+          "inputs": [],
+          "kernels": [],
+          "outputs": []
         },
         "offset": "0000000000000000000000000000000000000000000000000000000000000000"
       },
@@ -309,10 +269,10 @@ The transaction slate is encoded into a Slatepack message for sharing with the r
       }
     },
     "content": "SendInitial",
-    "recipient":{
-        "public_key": "4viaavr3hgyl26zqwwux4zsvairvqrbzfef7ih7tyk3a3jheqselndqd",
-        "domain": null,
-        "port": null,
+    "recipient": {
+      "public_key": "grxdcrjcvdq7aipjzuejjngr3til7euryqrpmtjg4hdqxnx3jyfst2qd",
+      "domain": "",
+      "port": null
     },
     "address_index": 0
   }
@@ -321,12 +281,12 @@ The transaction slate is encoded into a Slatepack message for sharing with the r
 :::
 
 ::: details Ok response
-```json
+```JSON
 {
   "id": 1,
   "jsonrpc": "2.0",
   "result": {
-    "Ok": "BEGINSLATE_BIN. 62GzuKRdyEXA7NS j9ZVB7tYCXotthS ZsjFZkRCmorDE1E LhTdCkxG1RP6A9U HaV64mMmLVcZur2 nyUiJGF4CcpwzGb qUy3uWgP2mp6H2p oXGd4w7GDYTubC2 1fkbtcpbThkSY9p Uw. ENDSLATE_BIN."
+    "Ok": "BEGINSLATEPACK. KbRGFBmJFBg5qWg k9Fi7EttkQKZ5pp L4mYHzzCfWw7Anf V8CZ6Ke1bkv3HxH XtrFoycTQ5FgC3p VZZpUiHVDXSXmKD wQJJHpKXZyqL66f bAs8CWvTPZoquaB Azd6XQVqeMRiape dmqpmhPUYE3f4Yr DQNLi9dzSPLU8c3 NT9frEz4oA2GaGB XsbFXqgsVgHeED5 f7859HKg8RVHQCn bC7dGVk3GnZKPA3 ejGahpUud7odiJi WJgThiYTwR7YdZg 9oyH21VCwoNMsar P1. ENDSLATEPACK."
   }
 }
 ```
@@ -339,7 +299,7 @@ After creating and encoding the initial slate, you must share the slatepack with
 **Example Slatepack to Share with the Recipient:**
 
 ```
-BEGINSLATE_BIN. 62GzuKRdyEXA7NS j9ZVB7tYCXotthS ZsjFZkRCmorDE1E LhTdCkxG1RP6A9U HaV64mMmLVcZur2 nyUiJGF4CcpwzGb qUy3uWgP2mp6H2p oXGd4w7GDYTubC2 1fkbtcpbThkSY9p Uw. ENDSLATE_BIN.
+BEGINSLATEPACK. KbRGFBmJFBg5qWg k9Fi7EttkQKZ5pp L4mYHzzCfWw7Anf V8CZ6Ke1bkv3HxH XtrFoycTQ5FgC3p VZZpUiHVDXSXmKD wQJJHpKXZyqL66f bAs8CWvTPZoquaB Azd6XQVqeMRiape dmqpmhPUYE3f4Yr DQNLi9dzSPLU8c3 NT9frEz4oA2GaGB XsbFXqgsVgHeED5 f7859HKg8RVHQCn bC7dGVk3GnZKPA3 ejGahpUud7odiJi WJgThiYTwR7YdZg 9oyH21VCwoNMsar P1. ENDSLATEPACK.
 ```
 
 ### Step 5: Waiting for the Recipient's Response
@@ -347,7 +307,7 @@ Once the recipient receives the initial slatepack, they will process it on their
 
 **Example Response Slatepack:**
 ```
-BEGINSLATE_BIN. oqubcv5dAuwDxnH mWc3UHM1JLj5XFd uv8qHNDgFzjpYFG zafDB1dptWRpYzq Qd2NpAeBb3RyTRU DcejJRc7zSx7VJ6 8ix3VeBAJWK9BGJ adXPdv7NJv2zV6h 41ZNzuwmGWdSaRx NjKJ9DK34UE7zjN RLsscBQU8WE7mnR Ubgft22oQ9mWrK2 6fadNCSnXg9sgsU v7VqbFVxdLjjznS 1W5taRMEpfGz4Ek ijdGDNqSvMAgiDo nWA4PFxRzcrZGHa dX17YaerjMdzdAo JFn49UyUMjpYg7b dTyLju2MLNB1cSW mAjkLbZLDYFQsGf xw6WuTHBvmQC49W ePHdroTbAUgkXtY csudeEcKcpkJrGf D8j2hKsn5zCn4wR CGmoEVuh2q4ejsX dtGhoB5hXbx91jY vJ5acUE5Jc1oydG MVjfHK3tjKNh4xN a3LrMZe5nkSWXxr 766pywJhPKUpWza FWGF12BG3zoQCmt DNmja1TKakmsbjT V8dM9vi3RqpHGVX QpU1hvBZ62Bj8SL CicYsYymoFXKvbX 5aDQUhAQVaRCBQQ jp1ie5wzRD4mH3z PMCvfQT696XYTcj u99WH1zBHHjKfKU aKVWzForHA7feHD rasSGUAS3WBptGt q6tN18rdxSHxTZ2 YRxJxoBLtwa1goZ DSpJ19bxPvsaaHr eHmUiyc5K1nTxNZ xZZufzXMA8evkQp CcUAJxdgE12GqTA BByRNPC7TF7JW6b uhbVFwWZbdtacDA VeGQz3bpxVfa179 u31sxVz4p9WTTzS EdtkgbUGcbtvikk VetmoqsPuTG5DeX sR6vMuvy5MQFYfv EyayGxnLmYrp8at YV834WdgNr65xRj vfWaSwsA5nXxZUd xzsE5y4SUrFte3M 3VdgwTyRxb42Ht5 z6RmQaVEz8FQfPK dWBuSQ2FtzdLMRX L2wyNN2ozWpkV7D LwTsf85aCn9mCoV JN9HRDYuCbvpS7g aTBQF5Wn5aCKd9E xrmBHwUGv1Memur AzgxeHmxJHpQTDt QJt7q1EtRPeCZbn 9QnfS9XiqNMLpZE K6sdPWL8WFvwx3z shLTmUaQiYGnGTX KLeirUMcmRH7Siq m4LztkN9h8UY4m6 briuHjEzFFodxDi nTf1zuCnNsXM8fM PxQ8XLySYSgfsWk YthU8CN4eNUkSib rYzc8EFqiEduqdA UfdoNDh4QmchHRk ygvDP1L1vRYcA9d fBcn5cxbAmFuAPP kXuyh6UBEuqASeV 9T38rYMmyRNj9oW EdUGJqoyH1RnnNc Sk9wFqZTufpM6Yb QYQmEYpxL51M2EY 2fmiCfCvTWvTLYW NZFJZxN48giREEB 3vYkAnnRuZ7kevF oAoViG8e8efjhQw Gj. ENDSLATE_BIN.
+BEGINSLATEPACK. 2t5mcXih1Sfx51S CH9rhDbtfhuV4ih apEUin14ZMSAZ8r W2ZnELPJzPCADDa bFdgZZp97dL7Dpb oGt2M1DpaiHCn7o L6yabNsTF7JaAcq samYT8nakedqasr be5TTpZ7QCzJSpS NgFE1ksmJfG2izv YdoGCstWSfr4ziV N6aPgP5TLZ2mGcH 6E7WJah9PYMXXkz DBwYacEgkZTMvxz T8YEQXRxCSBewUP 53jk86rc9Cx59ze 8WKaC2wLJ6JKN2F d9DwjPJkTrNX8sQ SyispCGBucFnd5b BfwQXkewm7XuiHQ rf2RcEWwaPDY6To ZgjPbSjP7FVbLqm uWS9niHA9VHBQzw sukTPryeoJrZsbq AUqhY7nvR78db9T EiqaLoWCF1VexbC oWgSkVvFo3CM5d5 rF1dqF63rn7i8WA SfGAMSAjWE1XPgy cD2wFXtUrnPpR6Y 1kpu91yJqybnYZk g1tVdMb37iyGtVW F361CVCwMFPYQ4W vctsgNiMzRkNpWm BqztHACWWKyEuUM DhL5rK7p77KXYo3 pj3mQ1CNh6ckLjC gtG4Eawkoriq3vH LA2Q3g1eW2v2zdM BRrJhJKZKiTZH7h U994Bnx5huHRJ3i Qio7A8z3VktMdwu wFMZdUB8RDPw3r9 p8JjeuDYWpY8LvU nQNabw23pZxpLyY by289pWZqCBWkta H1UkiQ5aYhrwAK5 5ggDfonxnUgHH2b JwZkj7zLRw7jXaZ HmcJbNHBYizFCZe rQHYrkwrywNRar6 AAJD7Lt5ABg1L5q cEVgUwuS86D2b7k x389o3D1XVSRGno JZ63aWJTZqRQhkd Rhs7cvbugraQdnF gAHfUnMBMEqjwDw RxZyQC5ZQR5daWq uTt89NSB5yfRGy6 YYRFLHNZXTG8twC fR4PmYwTwy79paq EGFPpfqdQC29nxR paMWdnrD6Uvkhf1 eFyy4ZCRUTzFYdK daFzZBihWjvR62E AgeCs7W9QuSoF6Z VJwpSSe386xndEF cqWC2ZbJPb8RkXJ Xba6FQib9v1n9rZ JMbLJ46X7HAZgEf jZE5mGzq7qP7nmA 2ssgDtn8BykTeem U9Q8wAcXzTdqfjP pDuJa9MQABZ35rt MAjMAiP6y7ta48t gZ3hyg6uhxNa7Jw kfyuWeFiDZyVg8C 8Gi9ARbMiKLdG4C J92Xrttny51AL4T Za7XK2LPGHBdKP8 9qVjBkMVdNuhaqJ 56RuAdgfBNgC4ws fLunn55BzkHmQL4 BJt3AZFqVD7bzom 4ode7JPMbeJZibo 6JAnz5sf12cm8uX o1RKcM5BfZDeRb2 5pTj7o6VhGUEDB4 je7qGUwZUnyU2af TjZRMoZ7Lv3FhV5 ZXW4uSNBfAfExvE hiBhbAKvVsY3mGG Ycw3vos6e9FZ7oh dQy6tHNm5ZQak45 zM81XZ9E2ZcQdMY KaL4wY7ZyMNGo5x j2wu3Nsv9chrjBM gdwH7MPnGx4yKuh nbERmiEyzvteGoi pzUZ39qYkgT8pmP ffN5. ENDSLATEPACK.
 ```
 
 
@@ -363,8 +323,8 @@ The sender finalizes the transaction by combining all signatures and preparing t
   "id": 1,
   "method": "finalize_tx",
   "params": {
-    "token": "f97e6cfd63b5332ef40e91203458058ef68c7646ab0f4d0f419cdcd5056f74e9",
-    "slate": "BEGINSLATE_BIN. oqubcv5dAuwDxnH mWc3UHM1JLj5XFd uv8qHNDgFzjpYFG zafDB1dptWRpYzq Qd2NpAeBb3RyTRU DcejJRc7zSx7VJ6 8ix3VeBAJWK9BGJ adXPdv7NJv2zV6h 41ZNzuwmGWdSaRx NjKJ9DK34UE7zjN RLsscBQU8WE7mnR Ubgft22oQ9mWrK2 6fadNCSnXg9sgsU v7VqbFVxdLjjznS 1W5taRMEpfGz4Ek ijdGDNqSvMAgiDo nWA4PFxRzcrZGHa dX17YaerjMdzdAo JFn49UyUMjpYg7b dTyLju2MLNB1cSW mAjkLbZLDYFQsGf xw6WuTHBvmQC49W ePHdroTbAUgkXtY csudeEcKcpkJrGf D8j2hKsn5zCn4wR CGmoEVuh2q4ejsX dtGhoB5hXbx91jY vJ5acUE5Jc1oydG MVjfHK3tjKNh4xN a3LrMZe5nkSWXxr 766pywJhPKUpWza FWGF12BG3zoQCmt DNmja1TKakmsbjT V8dM9vi3RqpHGVX QpU1hvBZ62Bj8SL CicYsYymoFXKvbX 5aDQUhAQVaRCBQQ jp1ie5wzRD4mH3z PMCvfQT696XYTcj u99WH1zBHHjKfKU aKVWzForHA7feHD rasSGUAS3WBptGt q6tN18rdxSHxTZ2 YRxJxoBLtwa1goZ DSpJ19bxPvsaaHr eHmUiyc5K1nTxNZ xZZufzXMA8evkQp CcUAJxdgE12GqTA BByRNPC7TF7JW6b uhbVFwWZbdtacDA VeGQz3bpxVfa179 u31sxVz4p9WTTzS EdtkgbUGcbtvikk VetmoqsPuTG5DeX sR6vMuvy5MQFYfv EyayGxnLmYrp8at YV834WdgNr65xRj vfWaSwsA5nXxZUd xzsE5y4SUrFte3M 3VdgwTyRxb42Ht5 z6RmQaVEz8FQfPK dWBuSQ2FtzdLMRX L2wyNN2ozWpkV7D LwTsf85aCn9mCoV JN9HRDYuCbvpS7g aTBQF5Wn5aCKd9E xrmBHwUGv1Memur AzgxeHmxJHpQTDt QJt7q1EtRPeCZbn 9QnfS9XiqNMLpZE K6sdPWL8WFvwx3z shLTmUaQiYGnGTX KLeirUMcmRH7Siq m4LztkN9h8UY4m6 briuHjEzFFodxDi nTf1zuCnNsXM8fM PxQ8XLySYSgfsWk YthU8CN4eNUkSib rYzc8EFqiEduqdA UfdoNDh4QmchHRk ygvDP1L1vRYcA9d fBcn5cxbAmFuAPP kXuyh6UBEuqASeV 9T38rYMmyRNj9oW EdUGJqoyH1RnnNc Sk9wFqZTufpM6Yb QYQmEYpxL51M2EY 2fmiCfCvTWvTLYW NZFJZxN48giREEB 3vYkAnnRuZ7kevF oAoViG8e8efjhQw Gj. ENDSLATE_BIN."
+    "token": "ddab9a3b96d73d3539d4e6fc15f69637888425e440d928771aeb7dac4157b8d1",
+    "slate": "BEGINSLATEPACK. 2t5mcXih1Sfx51S CH9rhDbtfhuV4ih apEUin14ZMSAZ8r W2ZnELPJzPCADDa bFdgZZp97dL7Dpb oGt2M1DpaiHCn7o L6yabNsTF7JaAcq samYT8nakedqasr be5TTpZ7QCzJSpS NgFE1ksmJfG2izv YdoGCstWSfr4ziV N6aPgP5TLZ2mGcH 6E7WJah9PYMXXkz DBwYacEgkZTMvxz T8YEQXRxCSBewUP 53jk86rc9Cx59ze 8WKaC2wLJ6JKN2F d9DwjPJkTrNX8sQ SyispCGBucFnd5b BfwQXkewm7XuiHQ rf2RcEWwaPDY6To ZgjPbSjP7FVbLqm uWS9niHA9VHBQzw sukTPryeoJrZsbq AUqhY7nvR78db9T EiqaLoWCF1VexbC oWgSkVvFo3CM5d5 rF1dqF63rn7i8WA SfGAMSAjWE1XPgy cD2wFXtUrnPpR6Y 1kpu91yJqybnYZk g1tVdMb37iyGtVW F361CVCwMFPYQ4W vctsgNiMzRkNpWm BqztHACWWKyEuUM DhL5rK7p77KXYo3 pj3mQ1CNh6ckLjC gtG4Eawkoriq3vH LA2Q3g1eW2v2zdM BRrJhJKZKiTZH7h U994Bnx5huHRJ3i Qio7A8z3VktMdwu wFMZdUB8RDPw3r9 p8JjeuDYWpY8LvU nQNabw23pZxpLyY by289pWZqCBWkta H1UkiQ5aYhrwAK5 5ggDfonxnUgHH2b JwZkj7zLRw7jXaZ HmcJbNHBYizFCZe rQHYrkwrywNRar6 AAJD7Lt5ABg1L5q cEVgUwuS86D2b7k x389o3D1XVSRGno JZ63aWJTZqRQhkd Rhs7cvbugraQdnF gAHfUnMBMEqjwDw RxZyQC5ZQR5daWq uTt89NSB5yfRGy6 YYRFLHNZXTG8twC fR4PmYwTwy79paq EGFPpfqdQC29nxR paMWdnrD6Uvkhf1 eFyy4ZCRUTzFYdK daFzZBihWjvR62E AgeCs7W9QuSoF6Z VJwpSSe386xndEF cqWC2ZbJPb8RkXJ Xba6FQib9v1n9rZ JMbLJ46X7HAZgEf jZE5mGzq7qP7nmA 2ssgDtn8BykTeem U9Q8wAcXzTdqfjP pDuJa9MQABZ35rt MAjMAiP6y7ta48t gZ3hyg6uhxNa7Jw kfyuWeFiDZyVg8C 8Gi9ARbMiKLdG4C J92Xrttny51AL4T Za7XK2LPGHBdKP8 9qVjBkMVdNuhaqJ 56RuAdgfBNgC4ws fLunn55BzkHmQL4 BJt3AZFqVD7bzom 4ode7JPMbeJZibo 6JAnz5sf12cm8uX o1RKcM5BfZDeRb2 5pTj7o6VhGUEDB4 je7qGUwZUnyU2af TjZRMoZ7Lv3FhV5 ZXW4uSNBfAfExvE hiBhbAKvVsY3mGG Ycw3vos6e9FZ7oh dQy6tHNm5ZQak45 zM81XZ9E2ZcQdMY KaL4wY7ZyMNGo5x j2wu3Nsv9chrjBM gdwH7MPnGx4yKuh nbERmiEyzvteGoi pzUZ39qYkgT8pmP ffN5. ENDSLATEPACK."
   }
 }
 :::
@@ -376,7 +336,7 @@ The sender finalizes the transaction by combining all signatures and preparing t
   "id": 1,
   "jsonrpc": "2.0",
   "result": {
-    "Ok": "BEGINSLATE_BIN. DecAL8ynyrUGJbv D1T6idiKkDJGiNY 4WaXVvtderipXh7 mitgn75WP5MMEzT 5rWwC2nJaUBmFK2 RHeaG1Yn9nWXYmF k5xXFyZMkfBgmcJ AWozt1BvEtQ5yFa KVnePxVbmF81RDX 1LEpLk77jEunjs5 sGZw6A7NLCmcYBM 44MchnXhhsK3cru hPjpyEtLz5DnXPz wKgLgrtUqQ9edVM c6owqEHEd24dkM7 Gi2Ybc1E6wb1Btb 2Et9SqeFi1aJFWG UpJ98pLj5jLedyS kQDwRRcKCJ2gxEA tb3KwRCocWzbtTw TY4HvWegzQiArWK Rpe7rsQs73F6rC1 81HaBsrcERtDhsj ehD5geYhezLkWnu obocrTVXEyipB2Q 2dx8qvjdwb1iiec C8F7nK6qzyPcdLV WMXxknGySX6pxqf b6rtWWxXWAGNjkk aoVtsr45nZ7trhs HyyNkf8cthWLYi6 Bs3zQk1X3V4nkDj n5AhgKdxRJeFoNj SJAQRGvcsYWWZPi BRZj6TqAP5LkCmk 5LoDzDZVKRAf67w U7W7ceZ2doJG1up YPMrGgzMS3ehU4A Up5aXPHoB5gGLQB whU5vmpcSYbiHKr DtUiX4Q98ESencT 4hGgPJzCs9p5GrW QCrCHGCDR8yetzz xqYuyrLrKi8tWCA Sc1ftnbMWKYJiXp 9HJmFyaLnFbkw6i ETBqSkJJdRaikpo QJdtb9q32oWThMv hWxQNn5JjG5GuHA 1fZxBwQHd2yHHa7 S22B2mzMqM215WW px6Xd2HKw5m7JBJ adNK1fvSuBS8Vfr ssjUvVgcenA2MfN vojHKLy8nfdkJt5 9kYJedbYVJhp4Ez Lw4QtDHBWGEVsFf eYEpr8o6FaftKPZ GNDHZo6noiRcMiZ HvfWqBARJkq5JeE HoPXaz2fy4mKPJA qxgzejoMLxhRg2m hHHiTKqFqTBxPbC ERkdAiw6EkXPFbR c7eA7tENKy6zCRm AL17C5kMGFMvKD9 xMm8KZFbKJMzutQ KA1XwPWmD34ARsJ xK6J7F2HPLwStAC ifCRHSxTbvuvyJr CDFjAneudpB7M9V jWh3AoFBBRJ4K4V r3uJ4bXxtojobLG pRb1t74dtpYDQd6 fYkqbkVV4vhmj6w HsbxTkDD9ECsNPs azVHpxJgtE2TiQG jfweBMptrqwQk2b Rb9ym1aM1Dn3Unb pdoRggWL5d6jQsL eNobfZapvXPEZ9i DbX62ZRNcpYXAgG nvwXpnVxzq5TsgC nEp4nBrPN7qxihg EbXYVvh4wg8MYzz 4ZZVo8mMPW3oSb6 8aY7aeF5AgKL2yQ 1LYoXEzbPoizBj7 vX3VgzqpBPnYKfB 5Yjpx9G21tEgCFR NtkH4sgtzcqYfhM hjH2vbTaecSeSmU Tp1kxUFM2VbU89j nV83fbM2V9JjqYu SQru21HLkjw23W3 vstETXieLM69Uys qmV4cYC4M3LQdpF QARsoQVNbi2FVD7 TqmU4RMKEDxwYG2 P3UXgb994R57pHf Fg3vghhBujNxJcu 1DCaYXFSgdAorqh MeyBoq6NYeXesRV cL7Lm7hQicJFmSt QeSc3sY9kqxfpRM CJghqoYUjqgAQmP c5kStJoFpsDoJ3v uRvNUnJtnm85ZaR 2dU6FDvCMHm7NxN D8yNvmY5zFcwqGY DFmPm1hfy83jNzz GmyaCXfUTwLx7EZ eigsq8U5ouY4RKU zpj7AHjcu3P1zNd BW6HmywBmAEww3N mDne1DFDHMrwa7A WyMXiqG8T4bpMPp rbWgJPh7hKQsmqc wQhSFDkRwQSdzdZ K9HA9vFXAeK8bcL Cpza5LVWnBiarLQ 6dQWwAqcZTiUW82 xHnoFNGLqCktqdP L3Euf3N5qHg7RYN uERsgDQLS69tr1c CdsG1HtgDtzDooo aHRRmRtdbiYRbbS Q5iQHxdvumG6hVS qpryazHfDQYaKKB vPKScd39WPb7TQL 4E1jhZx5F9tPKBU iXf6nQYQasBxii5 hXPYB3XcGWTKWv9 BQaszhqwsawjGk6 b4tTqqd9xCXRppb Qx13NJWBgcqqSRg rmx7aEuQmph7sZw wFPs2TQm7zfm3bp sQHqspJMGuA5xqW xSxiE8rcSbP17Y9 2q8iDYKZ2LdhbqN BfX8byYhMuxJm99 C8sj71Ex7ZZtjBY obgU5yTzffoGagq T5emFEkHgLeK6rw jCqiVX4GZCdfETA PuJHDAxeayFQ5uK mFfPmrgkTc3Ayyo yiyngZFc5Lqywjx sGFAW9LRUFPRP9m 1ggfjY6AW3ouEhF Ub4GHoEwDw2X1c3 A61xf9K2LESUmoq C6xYFaJ179msRkY RPVR9PXhvHeiEdf Lq4mmzByTkwKXBw n8zeYw3SCD4eVv2 TFKa9oQmSCfuSTk EW5o9DCZTYNayFy xkwG59DGunN6Qoz 2DyhMncipTxwXa2 2NkpagKZ7HaVDsc z9nWFP9vsVciaLi p6M2qkUDT1s6gMX F8UMy3MTnoz4sFa pwTH4Mh921P2ZHT WKf8unhrqRcWpFo x3mTMouP8v52MaC SNhWX4BRWAgdXgu PExryv4txdrPRVC q75k7gRkDsekdv8 rXczqUXse5HgveL 2iRu6zpLQvBmZva ie3jWDr6KucXKrS 3. ENDSLATE_BIN."
+    "Ok": "BEGINSLATEPACK. CYFJ6Q7ErbpJ1ic XTRLqDwrLHkpgoR wHCyjZasSLdb246 6torkSmxqtsqMxy FCMSprAJ2XPfRo6 QdLGkLR5GXtvLfY WCMxUw1FrP3CB49 kyMKQpWmQwooKGm Vk6HLc8A4MhtVCB Fh3hrbst7VJLuPH rQ5UCad9CdVpcPp mMtVHaL3becbCU8 iTcyhLXXp4g8kbY fxXAA1Mk5t4Ptxv TpPP9u36eWArbQM MzWermcYuFutaoK tpkP25oYEeNEFuG eAcTtAXEYCLSNhJ 2RvHPUpMpaqbQ74 1gp6mN4TUu1yfvK fKZZutsjqoYfUdP MH2qKnokVJg6Cmb J1Q7n2U5aqSyLe4 FceMHZDUBAbSXtJ qMUTbzVZ5kpyKQt xtakoMCtXep8ozC uk2CT6zAAhJbvsL sXfQkqa8hitftZk SoWNzuK9Vwji6g5 H7oD84R6p5Brsoi QLqUWoF8daEMPdS VAH8njdcPPMwLCv f9LLFT7gsdQzSDV orw9LVaw96ET8hc QK2DuoiTYLY2EDU LhsVrHywcwakuXF uwoSbmQwvKWkFGs Lejz1QyKfr9p4hL tD2jcYUPwZnH1J9 LcRqLTMsjqC5spc pLVb5Zc8CcaorFo CB2UreoA6c2kW3K Lm7gB6fDZAKWYRs MGmz297FgfdA56S Hpzhg6HQ3CEGVdz 2Rg37L5myccQd74 i6EzVgutztPoyad gY4TGrasRZnJwNK eS5hTRfRj8aTwLd 46eDbfM2qMkmbVh mbEa1vCVCVAiLYb hTXgFGd9SMarpDQ APx1nvBwddALjup 1cC3TP7ioVapu94 CCP6GcngRnQyKMo sQFQpqJJ5ZS9U2G FPrCu6LzxN3M8oT 3QM9zCCuLTgkECh ybpvcDrMoTAYtcW xJp3pgjZ6MgZ8bS W3Fb2jUv8zfikwS iVHmBdcH1XquSxo nsCk5eQL33VbzTb ALYfNFuVdRZ1dRm oULyDKDHyQWpyhE hAyrWnEvEraTiTV EdoksjaiJH2Xvgy Pk5UgTQ1p726gVs f5ER1GLhqJx86sE uYrWQ1UZ6BGHFqu BzS5dtKXgT42KdH 5irKuBCXcK2iRpK 9nFmnWPg8W2gFZB 9QXXTQS7rFkYUhD MWXNQt48viMDJEk qP5tjPoL1JCzwDh naiEEGruh13ojZi YCwT9XUQBAHsZt6 ZfiourqsRSoHwwv rYvVzn3GUjXFZEq AGvegyHvPFEGzfA q6npwpeDiW9RqBD NVJuT8dmawngL48 ZNuZFHi2Xune2RV H4MFWbuhvgiBNB9 ussPbVFZwDJCbid 7HnKyymEWxwvPBn RVnvu4BGkzUbHZh 83sgrGCKbhqhCZE 18dTLTk2oLRNdgp BnbaTfyQsSncfev Q4Rpbrcw9ynSYMU aruUENGmgG6CPnK FW3ZwAA43DqVRUa FsYekifyU8qqN5o 2BU3389oV7iHrvJ oWpjSq5uVexBM2G aixaoRk8vHQCW1U dkD8AnFrcZacpXB YaMAeBy8ZBSLApF rs5NLA47zk1NDZe 8KWNkAm9tv2vto1 xLFdeaYzRSvw6uG 8yRZxL2uXZvDn4z HJNVbWiqFRFHvgd N8CRLk4RNBqz2SX hVhUGK2swnz1Wd5 W47WHsd1NwRKvmx cxi2DtiJiAw2JJC HNf6pEzequYzDMo UFW5ftQLiuQFWTc 8vrzvrugVT8ULHE fyMfbsoyiQdXT5c My4UePwXTjznyoE xHvKeb8dnSW155J 3Lcz7UrtXdetVGg ZiGNtjejYx9V2ST R2VfU7DhAn1Tm4a iUfkhLKkUr4Kp8f 7Pkj8JWKFyiti5L jVoGqdESHUC9tzh nvGemEKGWspSfoH eG9zvuGHSm1AGMZ tQT9paXMmd8c5KE mUWp71rTGW9U42w 2KSJryoKKp4RBhi efBkxPoF63BNaP6 4co2BUqtAyiX1Vs jH82WsS6jqaexu6 R8o2c2UCjQPSecT GDm3manhppBfBCy Yriu4u8DJrXRczw NHrL98bMZ4amUVk HrofTA64b3VYNYS YjXZ7MaMqnSDPUV u9XVRroSzGEBJ3Q 8oVbbdKkHCv8MS9 X4idbDPJPrGo2ui PTyhabScnjHpd7P HNRrjqYTmVggqDD o7atEo9YgyhcvWf LWuyiE4UMcU9tSX 7YmkKBWti6V1NUZ gPrtnt26wgx7UGM UnQWdhPhDUaaDdR 1HZdFvJ2C529qdh bYHq5opdK7y4u4z RXDbsjPkRpa1rqR wLxUnAaREQydzHg 8r9UztfmF2cB5wD m8qPSp3epK5ZZXj Ui4Wkg2VkNGEeSF ayitZ4PHNnvkXfd x32u1veivHkAbni WLBs2NJ6nEq1cA3 cRSkodFJm9GRb8d babZNMigbdx5Lg2 9PoAH4pqbGymC25 ftV8TVX69sHMSzx xrPYtxJHVvHPmkF AJCddnAT6aXRRkd wvj1ckmayCjvcQk D8d2o2GDVYiCMAV 9MKm9kN2vywgVar RLbYQue9vxBey8s q1hR4s1LKBiuPgg EFZ5oztTSvhLdHE CT1rLxUg9mi2XRa 5EvYPdxKXqGuqFu dZ3VzPfcNuEjbVv XsaEpAmCBgQmUVZ xZma67A7hCg4ei9 YdfbpYZhccnuGbN poLo35RiCd7eyzU b1sP9YXcWRZiW5N YEspB9XGibZACNk utL4jWhHApfcnBe aPX9DwFohoCWd7r gVB6rRp7LkLEJMf TeEmLmneYQE2m1r M2mCAee5PUTjQ5Q Mjj7Kf2iMBB8YsF DcniGgXtqRnkGuL kbz. ENDSLATEPACK."
   }
 }
 ```
@@ -401,8 +361,8 @@ Once the transaction is finalized, the next step is to decode the finalized Slat
   "id": 1,
   "method": "decode_slatepack_message",
   "params": {
-    "token": "f97e6cfd63b5332ef40e91203458058ef68c7646ab0f4d0f419cdcd5056f74e9",
-    "message": "BEGINSLATE_BIN. DecAL8ynyrUGJbv D1T6idiKkDJGiNY 4WaXVvtderipXh7 mitgn75WP5MMEzT 5rWwC2nJaUBmFK2 RHeaG1Yn9nWXYmF k5xXFyZMkfBgmcJ AWozt1BvEtQ5yFa KVnePxVbmF81RDX 1LEpLk77jEunjs5 sGZw6A7NLCmcYBM 44MchnXhhsK3cru hPjpyEtLz5DnXPz wKgLgrtUqQ9edVM c6owqEHEd24dkM7 Gi2Ybc1E6wb1Btb 2Et9SqeFi1aJFWG UpJ98pLj5jLedyS kQDwRRcKCJ2gxEA tb3KwRCocWzbtTw TY4HvWegzQiArWK Rpe7rsQs73F6rC1 81HaBsrcERtDhsj ehD5geYhezLkWnu obocrTVXEyipB2Q 2dx8qvjdwb1iiec C8F7nK6qzyPcdLV WMXxknGySX6pxqf b6rtWWxXWAGNjkk aoVtsr45nZ7trhs HyyNkf8cthWLYi6 Bs3zQk1X3V4nkDj n5AhgKdxRJeFoNj SJAQRGvcsYWWZPi BRZj6TqAP5LkCmk 5LoDzDZVKRAf67w U7W7ceZ2doJG1up YPMrGgzMS3ehU4A Up5aXPHoB5gGLQB whU5vmpcSYbiHKr DtUiX4Q98ESencT 4hGgPJzCs9p5GrW QCrCHGCDR8yetzz xqYuyrLrKi8tWCA Sc1ftnbMWKYJiXp 9HJmFyaLnFbkw6i ETBqSkJJdRaikpo QJdtb9q32oWThMv hWxQNn5JjG5GuHA 1fZxBwQHd2yHHa7 S22B2mzMqM215WW px6Xd2HKw5m7JBJ adNK1fvSuBS8Vfr ssjUvVgcenA2MfN vojHKLy8nfdkJt5 9kYJedbYVJhp4Ez Lw4QtDHBWGEVsFf eYEpr8o6FaftKPZ GNDHZo6noiRcMiZ HvfWqBARJkq5JeE HoPXaz2fy4mKPJA qxgzejoMLxhRg2m hHHiTKqFqTBxPbC ERkdAiw6EkXPFbR c7eA7tENKy6zCRm AL17C5kMGFMvKD9 xMm8KZFbKJMzutQ KA1XwPWmD34ARsJ xK6J7F2HPLwStAC ifCRHSxTbvuvyJr CDFjAneudpB7M9V jWh3AoFBBRJ4K4V r3uJ4bXxtojobLG pRb1t74dtpYDQd6 fYkqbkVV4vhmj6w HsbxTkDD9ECsNPs azVHpxJgtE2TiQG jfweBMptrqwQk2b Rb9ym1aM1Dn3Unb pdoRggWL5d6jQsL eNobfZapvXPEZ9i DbX62ZRNcpYXAgG nvwXpnVxzq5TsgC nEp4nBrPN7qxihg EbXYVvh4wg8MYzz 4ZZVo8mMPW3oSb6 8aY7aeF5AgKL2yQ 1LYoXEzbPoizBj7 vX3VgzqpBPnYKfB 5Yjpx9G21tEgCFR NtkH4sgtzcqYfhM hjH2vbTaecSeSmU Tp1kxUFM2VbU89j nV83fbM2V9JjqYu SQru21HLkjw23W3 vstETXieLM69Uys qmV4cYC4M3LQdpF QARsoQVNbi2FVD7 TqmU4RMKEDxwYG2 P3UXgb994R57pHf Fg3vghhBujNxJcu 1DCaYXFSgdAorqh MeyBoq6NYeXesRV cL7Lm7hQicJFmSt QeSc3sY9kqxfpRM CJghqoYUjqgAQmP c5kStJoFpsDoJ3v uRvNUnJtnm85ZaR 2dU6FDvCMHm7NxN D8yNvmY5zFcwqGY DFmPm1hfy83jNzz GmyaCXfUTwLx7EZ eigsq8U5ouY4RKU zpj7AHjcu3P1zNd BW6HmywBmAEww3N mDne1DFDHMrwa7A WyMXiqG8T4bpMPp rbWgJPh7hKQsmqc wQhSFDkRwQSdzdZ K9HA9vFXAeK8bcL Cpza5LVWnBiarLQ 6dQWwAqcZTiUW82 xHnoFNGLqCktqdP L3Euf3N5qHg7RYN uERsgDQLS69tr1c CdsG1HtgDtzDooo aHRRmRtdbiYRbbS Q5iQHxdvumG6hVS qpryazHfDQYaKKB vPKScd39WPb7TQL 4E1jhZx5F9tPKBU iXf6nQYQasBxii5 hXPYB3XcGWTKWv9 BQaszhqwsawjGk6 b4tTqqd9xCXRppb Qx13NJWBgcqqSRg rmx7aEuQmph7sZw wFPs2TQm7zfm3bp sQHqspJMGuA5xqW xSxiE8rcSbP17Y9 2q8iDYKZ2LdhbqN BfX8byYhMuxJm99 C8sj71Ex7ZZtjBY obgU5yTzffoGagq T5emFEkHgLeK6rw jCqiVX4GZCdfETA PuJHDAxeayFQ5uK mFfPmrgkTc3Ayyo yiyngZFc5Lqywjx sGFAW9LRUFPRP9m 1ggfjY6AW3ouEhF Ub4GHoEwDw2X1c3 A61xf9K2LESUmoq C6xYFaJ179msRkY RPVR9PXhvHeiEdf Lq4mmzByTkwKXBw n8zeYw3SCD4eVv2 TFKa9oQmSCfuSTk EW5o9DCZTYNayFy xkwG59DGunN6Qoz 2DyhMncipTxwXa2 2NkpagKZ7HaVDsc z9nWFP9vsVciaLi p6M2qkUDT1s6gMX F8UMy3MTnoz4sFa pwTH4Mh921P2ZHT WKf8unhrqRcWpFo x3mTMouP8v52MaC SNhWX4BRWAgdXgu PExryv4txdrPRVC q75k7gRkDsekdv8 rXczqUXse5HgveL 2iRu6zpLQvBmZva ie3jWDr6KucXKrS 3. ENDSLATE_BIN.",
+    "token": "ddab9a3b96d73d3539d4e6fc15f69637888425e440d928771aeb7dac4157b8d1",
+    "message": "BEGINSLATEPACK. CYFJ6Q7ErbpJ1ic XTRLqDwrLHkpgoR wHCyjZasSLdb246 6torkSmxqtsqMxy FCMSprAJ2XPfRo6 QdLGkLR5GXtvLfY WCMxUw1FrP3CB49 kyMKQpWmQwooKGm Vk6HLc8A4MhtVCB Fh3hrbst7VJLuPH rQ5UCad9CdVpcPp mMtVHaL3becbCU8 iTcyhLXXp4g8kbY fxXAA1Mk5t4Ptxv TpPP9u36eWArbQM MzWermcYuFutaoK tpkP25oYEeNEFuG eAcTtAXEYCLSNhJ 2RvHPUpMpaqbQ74 1gp6mN4TUu1yfvK fKZZutsjqoYfUdP MH2qKnokVJg6Cmb J1Q7n2U5aqSyLe4 FceMHZDUBAbSXtJ qMUTbzVZ5kpyKQt xtakoMCtXep8ozC uk2CT6zAAhJbvsL sXfQkqa8hitftZk SoWNzuK9Vwji6g5 H7oD84R6p5Brsoi QLqUWoF8daEMPdS VAH8njdcPPMwLCv f9LLFT7gsdQzSDV orw9LVaw96ET8hc QK2DuoiTYLY2EDU LhsVrHywcwakuXF uwoSbmQwvKWkFGs Lejz1QyKfr9p4hL tD2jcYUPwZnH1J9 LcRqLTMsjqC5spc pLVb5Zc8CcaorFo CB2UreoA6c2kW3K Lm7gB6fDZAKWYRs MGmz297FgfdA56S Hpzhg6HQ3CEGVdz 2Rg37L5myccQd74 i6EzVgutztPoyad gY4TGrasRZnJwNK eS5hTRfRj8aTwLd 46eDbfM2qMkmbVh mbEa1vCVCVAiLYb hTXgFGd9SMarpDQ APx1nvBwddALjup 1cC3TP7ioVapu94 CCP6GcngRnQyKMo sQFQpqJJ5ZS9U2G FPrCu6LzxN3M8oT 3QM9zCCuLTgkECh ybpvcDrMoTAYtcW xJp3pgjZ6MgZ8bS W3Fb2jUv8zfikwS iVHmBdcH1XquSxo nsCk5eQL33VbzTb ALYfNFuVdRZ1dRm oULyDKDHyQWpyhE hAyrWnEvEraTiTV EdoksjaiJH2Xvgy Pk5UgTQ1p726gVs f5ER1GLhqJx86sE uYrWQ1UZ6BGHFqu BzS5dtKXgT42KdH 5irKuBCXcK2iRpK 9nFmnWPg8W2gFZB 9QXXTQS7rFkYUhD MWXNQt48viMDJEk qP5tjPoL1JCzwDh naiEEGruh13ojZi YCwT9XUQBAHsZt6 ZfiourqsRSoHwwv rYvVzn3GUjXFZEq AGvegyHvPFEGzfA q6npwpeDiW9RqBD NVJuT8dmawngL48 ZNuZFHi2Xune2RV H4MFWbuhvgiBNB9 ussPbVFZwDJCbid 7HnKyymEWxwvPBn RVnvu4BGkzUbHZh 83sgrGCKbhqhCZE 18dTLTk2oLRNdgp BnbaTfyQsSncfev Q4Rpbrcw9ynSYMU aruUENGmgG6CPnK FW3ZwAA43DqVRUa FsYekifyU8qqN5o 2BU3389oV7iHrvJ oWpjSq5uVexBM2G aixaoRk8vHQCW1U dkD8AnFrcZacpXB YaMAeBy8ZBSLApF rs5NLA47zk1NDZe 8KWNkAm9tv2vto1 xLFdeaYzRSvw6uG 8yRZxL2uXZvDn4z HJNVbWiqFRFHvgd N8CRLk4RNBqz2SX hVhUGK2swnz1Wd5 W47WHsd1NwRKvmx cxi2DtiJiAw2JJC HNf6pEzequYzDMo UFW5ftQLiuQFWTc 8vrzvrugVT8ULHE fyMfbsoyiQdXT5c My4UePwXTjznyoE xHvKeb8dnSW155J 3Lcz7UrtXdetVGg ZiGNtjejYx9V2ST R2VfU7DhAn1Tm4a iUfkhLKkUr4Kp8f 7Pkj8JWKFyiti5L jVoGqdESHUC9tzh nvGemEKGWspSfoH eG9zvuGHSm1AGMZ tQT9paXMmd8c5KE mUWp71rTGW9U42w 2KSJryoKKp4RBhi efBkxPoF63BNaP6 4co2BUqtAyiX1Vs jH82WsS6jqaexu6 R8o2c2UCjQPSecT GDm3manhppBfBCy Yriu4u8DJrXRczw NHrL98bMZ4amUVk HrofTA64b3VYNYS YjXZ7MaMqnSDPUV u9XVRroSzGEBJ3Q 8oVbbdKkHCv8MS9 X4idbDPJPrGo2ui PTyhabScnjHpd7P HNRrjqYTmVggqDD o7atEo9YgyhcvWf LWuyiE4UMcU9tSX 7YmkKBWti6V1NUZ gPrtnt26wgx7UGM UnQWdhPhDUaaDdR 1HZdFvJ2C529qdh bYHq5opdK7y4u4z RXDbsjPkRpa1rqR wLxUnAaREQydzHg 8r9UztfmF2cB5wD m8qPSp3epK5ZZXj Ui4Wkg2VkNGEeSF ayitZ4PHNnvkXfd x32u1veivHkAbni WLBs2NJ6nEq1cA3 cRSkodFJm9GRb8d babZNMigbdx5Lg2 9PoAH4pqbGymC25 ftV8TVX69sHMSzx xrPYtxJHVvHPmkF AJCddnAT6aXRRkd wvj1ckmayCjvcQk D8d2o2GDVYiCMAV 9MKm9kN2vywgVar RLbYQue9vxBey8s q1hR4s1LKBiuPgg EFZ5oztTSvhLdHE CT1rLxUg9mi2XRa 5EvYPdxKXqGuqFu dZ3VzPfcNuEjbVv XsaEpAmCBgQmUVZ xZma67A7hCg4ei9 YdfbpYZhccnuGbN poLo35RiCd7eyzU b1sP9YXcWRZiW5N YEspB9XGibZACNk utL4jWhHApfcnBe aPX9DwFohoCWd7r gVB6rRp7LkLEJMf TeEmLmneYQE2m1r M2mCAee5PUTjQ5Q Mjj7Kf2iMBB8YsF DcniGgXtqRnkGuL kbz. ENDSLATEPACK.",
     "address_index": null
   }
 }
@@ -417,15 +377,23 @@ Once the transaction is finalized, the next step is to decode the finalized Slat
   "result": {
     "Ok": {
       "content": "FullSlate",
-      "recipient": null,
-      "sender": null,
+      "recipient": {
+        "domain": "",
+        "port": null,
+        "public_key": "grxdcrjcvdq7aipjzuejjngr3til7euryqrpmtjg4hdqxnx3jyfst2qd"
+      },
+      "sender": {
+        "domain": "",
+        "port": null,
+        "public_key": "grxdcrjcvdq7aipjzuejjngr3til7euryqrpmtjg4hdqxnx3jyfst2qd"
+      },
       "slate": {
-        "amount": "500000000",
+        "amount": "200000000",
         "coin_type": "mwc",
         "compact_slate": true,
         "fee": "7000000",
-        "height": "2623963",
-        "id": "17478843-f5d5-4c6b-8b31-a824969d8461",
+        "height": "2793169",
+        "id": "e2757000-4a03-47f9-b6fe-ed91dc2ceb9f",
         "lock_height": "0",
         "network_type": "mainnet",
         "num_participants": 2,
@@ -434,37 +402,37 @@ Once the transaction is finalized, the next step is to decode the finalized Slat
             "id": "0",
             "message": null,
             "message_sig": null,
-            "part_sig": "ab1b4100254b7b4b1089278f75cf4fb92e1abc5ee7274c3731e4901c59ddf7dc6b8550dc10dd06febe39c39935db6b4216fc61dfda45c6cc3682d11462be94fb",
-            "public_blind_excess": "02da83f0564f1fd3f286081cc1b456b9829e391b9342a66a66da7477902ce5181c",
-            "public_nonce": "03dcf7dd591c90e431374c27e75ebc1a2eb94fcf758f2789104b7b4b2500411bab"
+            "part_sig": "cda6177f47a1dcbe7b047e204899df52b0a9e5b0aa77602ee8654b07ec8a330958eac4addcbb0907ef9c4c3dbca6b4d83a2ebb70585211fe59f956048fd6daca",
+            "public_blind_excess": "028d440ffa605a04cc92ca9e77b6be3295042fdc088b12565c73ae3bb4c7fbabae",
+            "public_nonce": "0309338aec074b65e82e6077aab0e5a9b052df9948207e047bbedca1477f17a6cd"
           },
           {
             "id": "1",
             "message": null,
             "message_sig": null,
-            "part_sig": "ced51703d94ffb98dbfab103ab0a8acc13bec7542f90498ee9afd55d7cbfe221c0558801e884385fb793a30c90db3f9f1c60ff26176f9190672c32a352f806b1",
-            "public_blind_excess": "030d87263b0acfba235f457cfb5bd0243248d369851c9c57dc866faee103774f95",
-            "public_nonce": "0321e2bf7c5dd5afe98e49902f54c7be13cc8a0aab03b1fadb98fb4fd90317d5ce"
+            "part_sig": "b6dbd8bc8d8ba42ccab1f7a2f0f29e397b398cc738d8a6c2d7b1a65ff2e44cef1f7569c1aa695e5057de6c97a510a11f8ca70d4e92fa75ddec546c245160cefc",
+            "public_blind_excess": "031efd6d40e777ad190a6cf5122c3da17c6f8d5cba07ab483290c5af7a05fe0d96",
+            "public_nonce": "03ef4ce4f25fa6b1d7c2a6d838c78c397b399ef2f0a2f7b1ca2ca48b8dbcd8dbb6"
           }
         ],
         "payment_proof": null,
-        "ttl_cutoff_height": null,
+        "ttl_cutoff_height": "2794609",
         "tx": {
           "body": {
             "inputs": [
               {
-                "commit": "09fa0929c293e230f8f2b93912eeb922f7531b48ae70c0866cde0122126ad023af",
+                "commit": "0904f4c8c8b6972d42116c9b2358beacd65fa09c659f82d6213f8bb616249fe167",
                 "features": "Plain"
               },
               {
-                "commit": "08c189605f542625b0e35eebe1bfe491f3a7ff3a5e05984a62715342a361d13103",
+                "commit": "09a201d0563157ca0a76e9e84649fc9a13f6013c4ff6095cda193e1f75ad1f0378",
                 "features": "Plain"
               }
             ],
             "kernels": [
               {
-                "excess": "085303a4a1876a64f5c4fe116dca3b1c4e914e80960f16fab58dabef35ab654178",
-                "excess_sig": "e5249a0abb0d2a5d275a18a28ae446cad91a7161062dde7b11e502e92756b288ea99a20d6c036d9d3a2d1ef7ded9fc26345c6106f2b4575d9eae03b8b4b69bac",
+                "excess": "092310070bac5f6ff85b53edc57f6bc9788fee6e62b7446196b8c6e445c235a81d",
+                "excess_sig": "0500753b1963c40266c783ace923be9786dc065d61c2ec563a3beccf9919de9c361ef89efac695970adb70257bdaa63dc8d5c8beea4c87db464ec328e036a9c7",
                 "features": "Plain",
                 "fee": "7000000",
                 "lock_height": "0"
@@ -472,18 +440,18 @@ Once the transaction is finalized, the next step is to decode the finalized Slat
             ],
             "outputs": [
               {
-                "commit": "08b4604d29b8e6b1fdca342250fd14a32bba6eeaf364af7f3f406a3f2f58ebd0aa",
+                "commit": "08b46fa659f799c34d558bb4d6a1f4ada1d96870f94f3ec2a70b70f9117cefbd5f",
                 "features": "Plain",
-                "proof": "2c06ef1a38fc7adefdd7ea0143d3b0207d12f42c92e13096d9c00ff3ebe6a4d92c5c6fc7f81e8cf23c6bf2d53e8aba121396f8ae3fd382d7d0867b2dd50f054b05b1bff3c62c058df4d51faa711d49f38840b7622104c0ae60c3edcdc4bc39d09c5d7686ee9ce6fda121e29ae629bb7c5502cb984bf1ef28b08ae553258ddb71f69a9a794a2fe1c396a38fe070e667fec5f247b20e2d9e87ebe8a9a1f180b789ba84d37148f93eb3a86e683b515eaac6e5a82f96d72382d6b2368441ff84d68f7f47a94dfed470fb06e7beba563fe33d791951cf8dc6ecb2e1581e4ecfb587752f8ca95ad147c3f1e734126659d02495dfeec5dea757f73f63bf7c0d9af01cabb1e7a9988788a9685def7d707d59c104ee3dcab5e52563b8b934fa649d3d9750f879ac503b4e8a5ad2592ef7b29b42ef5d2d96b35d5c549a8ae8bf8485e9fda22cee277ece54529fb2deb552f2bd3ed59da9268f3f6314a57c7c2885de83713b124301fe22f6ced46ffae9fabbc6be8bca10a2438d66d816e8a1a20f3b4967045d3b49489a0eae85cba4cf8123d233e916ad01720e2ada319eba980b6d9a9e67cc4c8d049efdc0cfd6fa16d2f0535113ba7f0fb401b6cffd35b97248acbc9148d81c575413274125aca3b6418a9b01d1c7c9387a47d510b9fa2903e1edcf9b973fcd1cb3fa43fdb1330d7c175c6509d560592c26d0e556e6de69f39dadb86297634eed7ce238035a846f2754200abec6289dabc3ca19bcd01610061c0d211b75f7c4f4905bf81f04a2d981bc75eb8c4c651eb7ded10d64dec78474f103d2dd6673e6ed30daf9ab927de0c9468975d631810603c1f8b81093be88a6a508c6d6d4c18e7321ee20f55cd865d29d67157383662f87ad190e9bcbbcf854a5bcaf60687450b296afc0259739fce91bae74b8ba52a5ef0a7b32e5d84b29dbcb027c5f9687ad03"
+                "proof": "366332a6c80caff71c68f5e7a6df520647d937a9e055a0b59df68ef74743bd06b53f25eb159f734e8782121c4b4535f4d6eca5a65834bb18fd690102a3fd23c00a1a6aacd876f99d955a34c2984c324231fd68b8cf1d716f90db41b322624e48071679f59a662cc92dd4486f26c6e69783c23fa1bc8017dcea6d6734d25353bbed2f260e3d4888cb62a1d2a36161d0b3083ac433a66115a6dbd96fd18fc639df400779f710d21d049544e6e9e34ffdea6ff66c0f9a6938f84c38599fe264229eba5fed9ff9240656c10166f1a98be693b0a5f377704f51c74b0c3481a50c65efa7f64025cc42b1b3bcac1f3a0a9d787bc25fc69e9ffc2cf86f4315590032e49860a27f8a12fa1d5815cb336437f8cac6643409693cb506e1f1251ec4524504070639390f660b106f87fe2c9558f6c9a0e6a14207128d7501c7997b73abeaa46e4442ecffea29958c4919c960cc8c54fc2161d88a6fc29d0c75591675d4082098c19a01404af03428430a90eeb73e2e315164bae2d0489216213e6c956add6fd5c0bb3d1bd364bc6db2efe05a972f5417f62e023ab3f795375b3dba51d208757c04fc785e19400f14e858071e9cdbe4f047aa8a3eee160a96246b3f602b689bc040f15082ecdeb48974871d2c19fb4702dc1fa3eaca88836e0d29d79c7c747fafa9c4434e5c08863d677d97b23ecbf9486450e2fd97a0af5b39c6f6a738ad213b16bf8e8e12e3605262d82df8d621e832ef925f6d94fb2c8b78d335dbdf3b6010b545c877a0db358b84f922b46348a45bfaef29c149b927865497b17ce8626daf1501fa312b67b82dbe05d0e1dc85b87ee5cb61d28fa353feb1d24b145af00863ecce79ed55b890e8ea5800bb60a0960da93b2f0385fc2548470f8b8a9cd4ef7e2f776921cd78f45fce3223ad56e9d43cb1212848e39ce9db4947f05f0daac1f2d10ad3"
               },
               {
-                "commit": "09c105a8dc8cc2f34c19b245740f2ae0371c9326ef800859c5d4386310c2ad21d7",
+                "commit": "08291780a9a4c149a8a138a58bd69470ad080a8d2847cf76d59891cef573c41234",
                 "features": "Plain",
-                "proof": "9c7787830dc9ab4aa19fdda2d9bb1b3853c2a1250deb22c7e84cceef25f8d310157621418782e8f64d9427a6db2fd4638b16c855fa5a58d8a2f1e425e76eef150dce9417b8459eb1cae9f5a3926c94fb03cf453fadf4fe30ca551977ea3a27a33b5b62550c6226c6496920e0b598a86cfc4f7979b0ec39737a69e468525b832af9537020bd5105551305c143562239b8eab1eb2c70cf77fedff01bb050d6b8ae8c41d3f290144b5005c98c0d9f3ad5beb3499ab6662fe77a8cfef7c512b61b0ac8b787fd1070a7477645917fc3920f182cedc992ef9ab590078f29f0b4e62690348056fd7ec15c43d18c67fa2f8a573c2056db885a00255c53985cb8d96554518325aab49fc5b4ac1ec42824b7b0bd311259bc6521433fa3c0cd6dc21c720b1982e8020be843a728265a7f4dec731cfa9c40ecf2c46b8ba17011e4f164597cc0406375337f2dc455e5f2642b7d92fdfe1b0ee28ef87b7d899c4d40d48add809c3184017acb628d9e9538956b50d6cfba573ae28e189966be0590a261fa4d6b14aff30081f5bf9c2e506ae34fed8d4c0de8067a540fa9d548964bef80f4e56fdccf812656951bcb78219f532f981ddb0329b097f05bad49126a2958b6da1d88d0054da4dff603e36c890e158d8d07a07c7de4c727b1fff33517283da026ccd295f3c470ede51a490052c3f50047262148b9a56309a2015da9b149f62a1005ba004b940ebe2987d42cf0fc66831527da2143e82fccb0d6ef2d787e0b481ac4d0d3eb6cbc20ca7c1a8880f2409379159dcefbc376fda7f4778d8fba577d4c3f21dd145d9f733e97146cfceaa72ff4869a981de8ad192bf37a85b3b0643d7d605197707b6cda9453087d7182d20d71ace44e6d2a8e0e66249366b416217f056da7577cfa43cf92aa6ddb0e121f496d5b705efbe71ebe9724e3cbc279b21cbe7bbfae044cb3"
+                "proof": "8adfab42330c05f067924d3ededacf100b26a52e71b426c70e8b66e6949263d725e517586ed6592a8f85de81a680c03b0e08c2eb567adbc3441f041156adc723060925b856da6cfbc93eaf4e88881a8e32d13f7b539aac48a9e2efa299b7597fb3ba7a223e354e9265852327a6cf8d898fc496bf40b00bac9800cae47efed80c2fd7ba5971a313621db5328bb8c86fccb96a1d053c4f3523fb5d3b02897bc6ccab46327bee9555f7f2dfca26f018b02f7ac481c5de13af2ce2684c35af75c7dad60ec43b73a8e7f6c137b6b64c828694066ae649f55f01791482a243061323f1a0781f35149b1aaf3e14ac4fdf10e9392e003b5ee0e0fd0901aeba1896db374a739f6723dfe7d115a5367606c8960d9dfc7973831c35ced529e77314d6f7269b6985ddc9e9b69df17c8fef80755075e79fda7cb8f9959963037143a5d1b8179f9c2256afb3363f7daada6618622897b091fff437df28621206c294b4e14f0a1fc6b2033b9493fcf6e83854a551ec35bb9a1f8d84227911821f726377c9653212cfdb1da6676219ec8f730c1f0e926235215c6e15b7f42748240d425cfa33267a8c635b001e822d3b2a5089dd6e5431f6959480ce495ec3f2840e8e6394886c50dbb9e13a27115cdf2a8331f8448bb05b7e6e66704dd83842eeb4f1660bc42a69177cad0df31f9b0d4b2e3e93f9246f76c556b704d69189dfa627e674efc6c56fc953424d1b1df1bc7fc930ad02ca773743bcde2739f8758bd54019917fa8da91b96a613d56cc45c77cff32e3199e7a079e272a6b5c4c8f03e3131309ab12b8aab7fc36752cd5d84dcecf8e9bff6798d895a27adb09850af61bc9965f8fd409c1452f2c28851ee76a2adfc1af373b5ee9a0bf7321a2f9f917080dca4072b58c62731d32ccac6dd8aa49112919e73902bff33c6ee9b5928876f316e65f4daf21a11480f5"
               }
             ]
           },
-          "offset": "81e56ca4ef559918e53eab19fff2ed258a7cfac4239558ab0518bb6dfc25f2f3"
+          "offset": "cb0060822ae3faee5e48d9c34b42e9848cb6c7dbea17dd5796f58230dedb39f5"
         },
         "version_info": {
           "block_header_version": 1,
@@ -520,23 +488,23 @@ The [post_tx](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.OwnerRp
   "id": 1,
   "method": "post_tx",
   "params": {
-    "token": "f97e6cfd63b5332ef40e91203458058ef68c7646ab0f4d0f419cdcd5056f74e9",
+    "token": "ddab9a3b96d73d3539d4e6fc15f69637888425e440d928771aeb7dac4157b8d1",
     "tx": {
       "body": {
         "inputs": [
           {
-            "commit": "09fa0929c293e230f8f2b93912eeb922f7531b48ae70c0866cde0122126ad023af",
+            "commit": "0904f4c8c8b6972d42116c9b2358beacd65fa09c659f82d6213f8bb616249fe167",
             "features": "Plain"
           },
           {
-            "commit": "08c189605f542625b0e35eebe1bfe491f3a7ff3a5e05984a62715342a361d13103",
+            "commit": "09a201d0563157ca0a76e9e84649fc9a13f6013c4ff6095cda193e1f75ad1f0378",
             "features": "Plain"
           }
         ],
         "kernels": [
           {
-            "excess": "085303a4a1876a64f5c4fe116dca3b1c4e914e80960f16fab58dabef35ab654178",
-            "excess_sig": "e5249a0abb0d2a5d275a18a28ae446cad91a7161062dde7b11e502e92756b288ea99a20d6c036d9d3a2d1ef7ded9fc26345c6106f2b4575d9eae03b8b4b69bac",
+            "excess": "092310070bac5f6ff85b53edc57f6bc9788fee6e62b7446196b8c6e445c235a81d",
+            "excess_sig": "0500753b1963c40266c783ace923be9786dc065d61c2ec563a3beccf9919de9c361ef89efac695970adb70257bdaa63dc8d5c8beea4c87db464ec328e036a9c7",
             "features": "Plain",
             "fee": "7000000",
             "lock_height": "0"
@@ -544,18 +512,18 @@ The [post_tx](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.OwnerRp
         ],
         "outputs": [
           {
-            "commit": "08b4604d29b8e6b1fdca342250fd14a32bba6eeaf364af7f3f406a3f2f58ebd0aa",
+            "commit": "08b46fa659f799c34d558bb4d6a1f4ada1d96870f94f3ec2a70b70f9117cefbd5f",
             "features": "Plain",
-            "proof": "2c06ef1a38fc7adefdd7ea0143d3b0207d12f42c92e13096d9c00ff3ebe6a4d92c5c6fc7f81e8cf23c6bf2d53e8aba121396f8ae3fd382d7d0867b2dd50f054b05b1bff3c62c058df4d51faa711d49f38840b7622104c0ae60c3edcdc4bc39d09c5d7686ee9ce6fda121e29ae629bb7c5502cb984bf1ef28b08ae553258ddb71f69a9a794a2fe1c396a38fe070e667fec5f247b20e2d9e87ebe8a9a1f180b789ba84d37148f93eb3a86e683b515eaac6e5a82f96d72382d6b2368441ff84d68f7f47a94dfed470fb06e7beba563fe33d791951cf8dc6ecb2e1581e4ecfb587752f8ca95ad147c3f1e734126659d02495dfeec5dea757f73f63bf7c0d9af01cabb1e7a9988788a9685def7d707d59c104ee3dcab5e52563b8b934fa649d3d9750f879ac503b4e8a5ad2592ef7b29b42ef5d2d96b35d5c549a8ae8bf8485e9fda22cee277ece54529fb2deb552f2bd3ed59da9268f3f6314a57c7c2885de83713b124301fe22f6ced46ffae9fabbc6be8bca10a2438d66d816e8a1a20f3b4967045d3b49489a0eae85cba4cf8123d233e916ad01720e2ada319eba980b6d9a9e67cc4c8d049efdc0cfd6fa16d2f0535113ba7f0fb401b6cffd35b97248acbc9148d81c575413274125aca3b6418a9b01d1c7c9387a47d510b9fa2903e1edcf9b973fcd1cb3fa43fdb1330d7c175c6509d560592c26d0e556e6de69f39dadb86297634eed7ce238035a846f2754200abec6289dabc3ca19bcd01610061c0d211b75f7c4f4905bf81f04a2d981bc75eb8c4c651eb7ded10d64dec78474f103d2dd6673e6ed30daf9ab927de0c9468975d631810603c1f8b81093be88a6a508c6d6d4c18e7321ee20f55cd865d29d67157383662f87ad190e9bcbbcf854a5bcaf60687450b296afc0259739fce91bae74b8ba52a5ef0a7b32e5d84b29dbcb027c5f9687ad03"
+            "proof": "366332a6c80caff71c68f5e7a6df520647d937a9e055a0b59df68ef74743bd06b53f25eb159f734e8782121c4b4535f4d6eca5a65834bb18fd690102a3fd23c00a1a6aacd876f99d955a34c2984c324231fd68b8cf1d716f90db41b322624e48071679f59a662cc92dd4486f26c6e69783c23fa1bc8017dcea6d6734d25353bbed2f260e3d4888cb62a1d2a36161d0b3083ac433a66115a6dbd96fd18fc639df400779f710d21d049544e6e9e34ffdea6ff66c0f9a6938f84c38599fe264229eba5fed9ff9240656c10166f1a98be693b0a5f377704f51c74b0c3481a50c65efa7f64025cc42b1b3bcac1f3a0a9d787bc25fc69e9ffc2cf86f4315590032e49860a27f8a12fa1d5815cb336437f8cac6643409693cb506e1f1251ec4524504070639390f660b106f87fe2c9558f6c9a0e6a14207128d7501c7997b73abeaa46e4442ecffea29958c4919c960cc8c54fc2161d88a6fc29d0c75591675d4082098c19a01404af03428430a90eeb73e2e315164bae2d0489216213e6c956add6fd5c0bb3d1bd364bc6db2efe05a972f5417f62e023ab3f795375b3dba51d208757c04fc785e19400f14e858071e9cdbe4f047aa8a3eee160a96246b3f602b689bc040f15082ecdeb48974871d2c19fb4702dc1fa3eaca88836e0d29d79c7c747fafa9c4434e5c08863d677d97b23ecbf9486450e2fd97a0af5b39c6f6a738ad213b16bf8e8e12e3605262d82df8d621e832ef925f6d94fb2c8b78d335dbdf3b6010b545c877a0db358b84f922b46348a45bfaef29c149b927865497b17ce8626daf1501fa312b67b82dbe05d0e1dc85b87ee5cb61d28fa353feb1d24b145af00863ecce79ed55b890e8ea5800bb60a0960da93b2f0385fc2548470f8b8a9cd4ef7e2f776921cd78f45fce3223ad56e9d43cb1212848e39ce9db4947f05f0daac1f2d10ad3"
           },
           {
-            "commit": "09c105a8dc8cc2f34c19b245740f2ae0371c9326ef800859c5d4386310c2ad21d7",
+            "commit": "08291780a9a4c149a8a138a58bd69470ad080a8d2847cf76d59891cef573c41234",
             "features": "Plain",
-            "proof": "9c7787830dc9ab4aa19fdda2d9bb1b3853c2a1250deb22c7e84cceef25f8d310157621418782e8f64d9427a6db2fd4638b16c855fa5a58d8a2f1e425e76eef150dce9417b8459eb1cae9f5a3926c94fb03cf453fadf4fe30ca551977ea3a27a33b5b62550c6226c6496920e0b598a86cfc4f7979b0ec39737a69e468525b832af9537020bd5105551305c143562239b8eab1eb2c70cf77fedff01bb050d6b8ae8c41d3f290144b5005c98c0d9f3ad5beb3499ab6662fe77a8cfef7c512b61b0ac8b787fd1070a7477645917fc3920f182cedc992ef9ab590078f29f0b4e62690348056fd7ec15c43d18c67fa2f8a573c2056db885a00255c53985cb8d96554518325aab49fc5b4ac1ec42824b7b0bd311259bc6521433fa3c0cd6dc21c720b1982e8020be843a728265a7f4dec731cfa9c40ecf2c46b8ba17011e4f164597cc0406375337f2dc455e5f2642b7d92fdfe1b0ee28ef87b7d899c4d40d48add809c3184017acb628d9e9538956b50d6cfba573ae28e189966be0590a261fa4d6b14aff30081f5bf9c2e506ae34fed8d4c0de8067a540fa9d548964bef80f4e56fdccf812656951bcb78219f532f981ddb0329b097f05bad49126a2958b6da1d88d0054da4dff603e36c890e158d8d07a07c7de4c727b1fff33517283da026ccd295f3c470ede51a490052c3f50047262148b9a56309a2015da9b149f62a1005ba004b940ebe2987d42cf0fc66831527da2143e82fccb0d6ef2d787e0b481ac4d0d3eb6cbc20ca7c1a8880f2409379159dcefbc376fda7f4778d8fba577d4c3f21dd145d9f733e97146cfceaa72ff4869a981de8ad192bf37a85b3b0643d7d605197707b6cda9453087d7182d20d71ace44e6d2a8e0e66249366b416217f056da7577cfa43cf92aa6ddb0e121f496d5b705efbe71ebe9724e3cbc279b21cbe7bbfae044cb3"
+            "proof": "8adfab42330c05f067924d3ededacf100b26a52e71b426c70e8b66e6949263d725e517586ed6592a8f85de81a680c03b0e08c2eb567adbc3441f041156adc723060925b856da6cfbc93eaf4e88881a8e32d13f7b539aac48a9e2efa299b7597fb3ba7a223e354e9265852327a6cf8d898fc496bf40b00bac9800cae47efed80c2fd7ba5971a313621db5328bb8c86fccb96a1d053c4f3523fb5d3b02897bc6ccab46327bee9555f7f2dfca26f018b02f7ac481c5de13af2ce2684c35af75c7dad60ec43b73a8e7f6c137b6b64c828694066ae649f55f01791482a243061323f1a0781f35149b1aaf3e14ac4fdf10e9392e003b5ee0e0fd0901aeba1896db374a739f6723dfe7d115a5367606c8960d9dfc7973831c35ced529e77314d6f7269b6985ddc9e9b69df17c8fef80755075e79fda7cb8f9959963037143a5d1b8179f9c2256afb3363f7daada6618622897b091fff437df28621206c294b4e14f0a1fc6b2033b9493fcf6e83854a551ec35bb9a1f8d84227911821f726377c9653212cfdb1da6676219ec8f730c1f0e926235215c6e15b7f42748240d425cfa33267a8c635b001e822d3b2a5089dd6e5431f6959480ce495ec3f2840e8e6394886c50dbb9e13a27115cdf2a8331f8448bb05b7e6e66704dd83842eeb4f1660bc42a69177cad0df31f9b0d4b2e3e93f9246f76c556b704d69189dfa627e674efc6c56fc953424d1b1df1bc7fc930ad02ca773743bcde2739f8758bd54019917fa8da91b96a613d56cc45c77cff32e3199e7a079e272a6b5c4c8f03e3131309ab12b8aab7fc36752cd5d84dcecf8e9bff6798d895a27adb09850af61bc9965f8fd409c1452f2c28851ee76a2adfc1af373b5ee9a0bf7321a2f9f917080dca4072b58c62731d32ccac6dd8aa49112919e73902bff33c6ee9b5928876f316e65f4daf21a11480f5"
           }
         ]
       },
-      "offset": "81e56ca4ef559918e53eab19fff2ed258a7cfac4239558ab0518bb6dfc25f2f3"
+      "offset": "cb0060822ae3faee5e48d9c34b42e9848cb6c7dbea17dd5796f58230dedb39f5"
     },
     "fluff": false
   }
@@ -564,13 +532,7 @@ The [post_tx](https://docs.rs/mwc_wallet_api/latest/mwc_wallet_api/trait.OwnerRp
 :::
 ::: details Ok Response
 ```json
-{
-	"id": 1,
-	"jsonrpc": "2.0",
-	"result": {
-		"Ok": null
-	}
-}
+{"id": 1, "jsonrpc": "2.0", "result": {"Ok": null}}
 ```
 :::
 
@@ -629,8 +591,8 @@ Before processing, the recipient can optionally decode the Slatepack to extract 
   "id": 1,
   "method": "decode_slatepack_message",
   "params": {
-    "token": "f97e6cfd63b5332ef40e91203458058ef68c7646ab0f4d0f419cdcd5056f74e9",
-    "message": "BEGINSLATE_BIN. 62GzuKRdyEXA7NS j9ZVB7tYCXotthS ZsjFZkRCmorDE1E LhTdCkxG1RP6A9U HaV64mMmLVcZur2 nyUiJGF4CcpwzGb qUy3uWgP2mp6H2p oXGd4w7GDYTubC2 1fkbtcpbThkSY9p Uw. ENDSLATE_BIN.",
+    "token": "ddab9a3b96d73d3539d4e6fc15f69637888425e440d928771aeb7dac4157b8d1",
+    "message": "BEGINSLATEPACK. KbRGFBmJFBg5qWg k9Fi7EttkQKZ5pp L4mYHzzCfWw7Anf V8CZ6Ke1bkv3HxH XtrFoycTQ5FgC3p VZZpUiHVDXSXmKD wQJJHpKXZyqL66f bAs8CWvTPZoquaB Azd6XQVqeMRiape dmqpmhPUYE3f4Yr DQNLi9dzSPLU8c3 NT9frEz4oA2GaGB XsbFXqgsVgHeED5 f7859HKg8RVHQCn bC7dGVk3GnZKPA3 ejGahpUud7odiJi WJgThiYTwR7YdZg 9oyH21VCwoNMsar P1. ENDSLATEPACK.",
     "address_index": null
   }
 }
@@ -645,15 +607,23 @@ Before processing, the recipient can optionally decode the Slatepack to extract 
   "result": {
     "Ok": {
       "content": "SendInitial",
-      "recipient": null,
-      "sender": null,
+      "recipient": {
+        "domain": "",
+        "port": null,
+        "public_key": "grxdcrjcvdq7aipjzuejjngr3til7euryqrpmtjg4hdqxnx3jyfst2qd"
+      },
+      "sender": {
+        "domain": "",
+        "port": null,
+        "public_key": "grxdcrjcvdq7aipjzuejjngr3til7euryqrpmtjg4hdqxnx3jyfst2qd"
+      },
       "slate": {
-        "amount": "500000000",
+        "amount": "200000000",
         "coin_type": "mwc",
         "compact_slate": true,
         "fee": "7000000",
-        "height": "2623963",
-        "id": "17478843-f5d5-4c6b-8b31-a824969d8461",
+        "height": "2793169",
+        "id": "e2757000-4a03-47f9-b6fe-ed91dc2ceb9f",
         "lock_height": "0",
         "network_type": "mainnet",
         "num_participants": 2,
@@ -663,18 +633,18 @@ Before processing, the recipient can optionally decode the Slatepack to extract 
             "message": null,
             "message_sig": null,
             "part_sig": null,
-            "public_blind_excess": "02da83f0564f1fd3f286081cc1b456b9829e391b9342a66a66da7477902ce5181c",
-            "public_nonce": "03dcf7dd591c90e431374c27e75ebc1a2eb94fcf758f2789104b7b4b2500411bab"
+            "public_blind_excess": "028d440ffa605a04cc92ca9e77b6be3295042fdc088b12565c73ae3bb4c7fbabae",
+            "public_nonce": "0309338aec074b65e82e6077aab0e5a9b052df9948207e047bbedca1477f17a6cd"
           }
         ],
         "payment_proof": null,
-        "ttl_cutoff_height": null,
+        "ttl_cutoff_height": "2794609",
         "tx": {
           "body": {
             "inputs": [],
             "kernels": [
               {
-                "excess": "08da83f0564f1fd3f286081cc1b456b9829e391b9342a66a66da7477902ce5181c",
+                "excess": "098d440ffa605a04cc92ca9e77b6be3295042fdc088b12565c73ae3bb4c7fbabae",
                 "excess_sig": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
                 "features": "Plain",
                 "fee": "7000000",
@@ -718,7 +688,7 @@ The recipient processes the slate using the [receive_tx](https://docs.rs/mwc_wal
   "id": 0,
   "method": "receive_tx",
   "params": [
-    "BEGINSLATE_BIN. 8kBm8dTRtrskDCU TRruCj5bDo56r2p o9Ux7QHP3Jk7zYz ijPWx8nxhLHzNEY oce1HTx2aCozuTM jKU9NtS82yq4Nrv qxR8YL2tJ9sxjoh deDHf4S2Rzi9bXo i9gNY4z1LAwpjHi HV. ENDSLATE_BIN.",
+    "BEGINSLATEPACK. KbRGFBmJFBg5qWg k9Fi7EttkQKZ5pp L4mYHzzCfWw7Anf V8CZ6Ke1bkv3HxH XtrFoycTQ5FgC3p VZZpUiHVDXSXmKD wQJJHpKXZyqL66f bAs8CWvTPZoquaB Azd6XQVqeMRiape dmqpmhPUYE3f4Yr DQNLi9dzSPLU8c3 NT9frEz4oA2GaGB XsbFXqgsVgHeED5 f7859HKg8RVHQCn bC7dGVk3GnZKPA3 ejGahpUud7odiJi WJgThiYTwR7YdZg 9oyH21VCwoNMsar P1. ENDSLATEPACK.",
     null,
     null
   ]
@@ -733,7 +703,7 @@ The recipient processes the slate using the [receive_tx](https://docs.rs/mwc_wal
   "id": 1,
   "jsonrpc": "2.0",
   "result": {
-	"Ok": "BEGINSLATE_BIN. oqubcv5dAuwDxnH mWc3UHM1JLj5XFd uv8qHNDgFzjpYFG zafDB1dptWRpYzq Qd2NpAeBb3RyTRU DcejJRc7zSx7VJ6 8ix3VeBAJWK9BGJ adXPdv7NJv2zV6h 41ZNzuwmGWdSaRx NjKJ9DK34UE7zjN RLsscBQU8WE7mnR Ubgft22oQ9mWrK2 6fadNCSnXg9sgsU v7VqbFVxdLjjznS 1W5taRMEpfGz4Ek ijdGDNqSvMAgiDo nWA4PFxRzcrZGHa dX17YaerjMdzdAo JFn49UyUMjpYg7b dTyLju2MLNB1cSW mAjkLbZLDYFQsGf xw6WuTHBvmQC49W ePHdroTbAUgkXtY csudeEcKcpkJrGf D8j2hKsn5zCn4wR CGmoEVuh2q4ejsX dtGhoB5hXbx91jY vJ5acUE5Jc1oydG MVjfHK3tjKNh4xN a3LrMZe5nkSWXxr 766pywJhPKUpWza FWGF12BG3zoQCmt DNmja1TKakmsbjT V8dM9vi3RqpHGVX QpU1hvBZ62Bj8SL CicYsYymoFXKvbX 5aDQUhAQVaRCBQQ jp1ie5wzRD4mH3z PMCvfQT696XYTcj u99WH1zBHHjKfKU aKVWzForHA7feHD rasSGUAS3WBptGt q6tN18rdxSHxTZ2 YRxJxoBLtwa1goZ DSpJ19bxPvsaaHr eHmUiyc5K1nTxNZ xZZufzXMA8evkQp CcUAJxdgE12GqTA BByRNPC7TF7JW6b uhbVFwWZbdtacDA VeGQz3bpxVfa179 u31sxVz4p9WTTzS EdtkgbUGcbtvikk VetmoqsPuTG5DeX sR6vMuvy5MQFYfv EyayGxnLmYrp8at YV834WdgNr65xRj vfWaSwsA5nXxZUd xzsE5y4SUrFte3M 3VdgwTyRxb42Ht5 z6RmQaVEz8FQfPK dWBuSQ2FtzdLMRX L2wyNN2ozWpkV7D LwTsf85aCn9mCoV JN9HRDYuCbvpS7g aTBQF5Wn5aCKd9E xrmBHwUGv1Memur AzgxeHmxJHpQTDt QJt7q1EtRPeCZbn 9QnfS9XiqNMLpZE K6sdPWL8WFvwx3z shLTmUaQiYGnGTX KLeirUMcmRH7Siq m4LztkN9h8UY4m6 briuHjEzFFodxDi nTf1zuCnNsXM8fM PxQ8XLySYSgfsWk YthU8CN4eNUkSib rYzc8EFqiEduqdA UfdoNDh4QmchHRk ygvDP1L1vRYcA9d fBcn5cxbAmFuAPP kXuyh6UBEuqASeV 9T38rYMmyRNj9oW EdUGJqoyH1RnnNc Sk9wFqZTufpM6Yb QYQmEYpxL51M2EY 2fmiCfCvTWvTLYW NZFJZxN48giREEB 3vYkAnnRuZ7kevF oAoViG8e8efjhQw Gj. ENDSLATE_BIN."
+	"Ok": "BEGINSLATEPACK. 2t5mcXih1Sfx51S CH9rhDbtfhuV4ih apEUin14ZMSAZ8r W2ZnELPJzPCADDa bFdgZZp97dL7Dpb oGt2M1DpaiHCn7o L6yabNsTF7JaAcq samYT8nakedqasr be5TTpZ7QCzJSpS NgFE1ksmJfG2izv YdoGCstWSfr4ziV N6aPgP5TLZ2mGcH 6E7WJah9PYMXXkz DBwYacEgkZTMvxz T8YEQXRxCSBewUP 53jk86rc9Cx59ze 8WKaC2wLJ6JKN2F d9DwjPJkTrNX8sQ SyispCGBucFnd5b BfwQXkewm7XuiHQ rf2RcEWwaPDY6To ZgjPbSjP7FVbLqm uWS9niHA9VHBQzw sukTPryeoJrZsbq AUqhY7nvR78db9T EiqaLoWCF1VexbC oWgSkVvFo3CM5d5 rF1dqF63rn7i8WA SfGAMSAjWE1XPgy cD2wFXtUrnPpR6Y 1kpu91yJqybnYZk g1tVdMb37iyGtVW F361CVCwMFPYQ4W vctsgNiMzRkNpWm BqztHACWWKyEuUM DhL5rK7p77KXYo3 pj3mQ1CNh6ckLjC gtG4Eawkoriq3vH LA2Q3g1eW2v2zdM BRrJhJKZKiTZH7h U994Bnx5huHRJ3i Qio7A8z3VktMdwu wFMZdUB8RDPw3r9 p8JjeuDYWpY8LvU nQNabw23pZxpLyY by289pWZqCBWkta H1UkiQ5aYhrwAK5 5ggDfonxnUgHH2b JwZkj7zLRw7jXaZ HmcJbNHBYizFCZe rQHYrkwrywNRar6 AAJD7Lt5ABg1L5q cEVgUwuS86D2b7k x389o3D1XVSRGno JZ63aWJTZqRQhkd Rhs7cvbugraQdnF gAHfUnMBMEqjwDw RxZyQC5ZQR5daWq uTt89NSB5yfRGy6 YYRFLHNZXTG8twC fR4PmYwTwy79paq EGFPpfqdQC29nxR paMWdnrD6Uvkhf1 eFyy4ZCRUTzFYdK daFzZBihWjvR62E AgeCs7W9QuSoF6Z VJwpSSe386xndEF cqWC2ZbJPb8RkXJ Xba6FQib9v1n9rZ JMbLJ46X7HAZgEf jZE5mGzq7qP7nmA 2ssgDtn8BykTeem U9Q8wAcXzTdqfjP pDuJa9MQABZ35rt MAjMAiP6y7ta48t gZ3hyg6uhxNa7Jw kfyuWeFiDZyVg8C 8Gi9ARbMiKLdG4C J92Xrttny51AL4T Za7XK2LPGHBdKP8 9qVjBkMVdNuhaqJ 56RuAdgfBNgC4ws fLunn55BzkHmQL4 BJt3AZFqVD7bzom 4ode7JPMbeJZibo 6JAnz5sf12cm8uX o1RKcM5BfZDeRb2 5pTj7o6VhGUEDB4 je7qGUwZUnyU2af TjZRMoZ7Lv3FhV5 ZXW4uSNBfAfExvE hiBhbAKvVsY3mGG Ycw3vos6e9FZ7oh dQy6tHNm5ZQak45 zM81XZ9E2ZcQdMY KaL4wY7ZyMNGo5x j2wu3Nsv9chrjBM gdwH7MPnGx4yKuh nbERmiEyzvteGoi pzUZ39qYkgT8pmP ffN5. ENDSLATEPACK."
   }
 }
 ```
@@ -750,7 +720,7 @@ The recipient shares the updated Slatepack with the sender. This allows the send
 
 **Example Response Slatepack:**
 ```
-BEGINSLATE_BIN. usqHiSmrwTbxJD1 BKq9tdQUBJCLmRF unXjpYfGsr1hDhH XQSGvUyUKrGPttp dfMqT2LyGtDiSbJ LBaLwqyamCRQ6ga 4SyMzhP1D4CuTpr PjXwfvXqzZiEB4R LAKt3pe9WSPcBSK MuF6Dw9Y4mDJpka zkZ8uDRM4sUzhk8 SDk3ZY5FeeEoPG8 ug7miFxCZKCfMn7 8G2hf7KLobevDeX yQHV5Jja7vRH9kx sQ6PsUN2518EJm2 kc8wtAoHyP6KQTg znNkxvdJ6aXzvEU 5BL9UqS7x2d3U1B aunvhgyEVfE3LXk 7BMp8yPrzF3BBHX KJWLsftycvZwcvM eDZMREoZzMGQWNV PE37U3tEaFbHTWM hy5nNefS4TCoKCk b8WXrZUsRnHw4eX e26LQ94RQoTbXh9 9veAK2ECuU9ttre aK7VNEKmzE9hUea YcFdzXFkSGVcxJL J58T9vdBBUkK9PQ ncoN4aMhiwHwSfr MbJfyUQCLWwjFGY V8qiiVwMLApauyW 35fHztkvtoswH3z cZTJTn1aeYCvBt8 x3mqeMGtw6sFP7u YPEkbQx4ZbNHVaw 3AYsmFLKUS6D2rV EcCaUi3c4wjGopq yjfMh8Sw1irbxDh z55XmSSD1iqu7BV XqGRpjbdEe3ks8E TCW3GpkoDBA96Hm EDvT5d1FEFDefJU eZReffaiKAj54HA MmibCcS8ZPAfLa5 4dJkDqH9Xmquqeb Ut1gRt1HjLJ78mT GLDyMEiBWGw2RVj JNJZNxXy5PZcrfr x5D3U65hobmk7ZT 6VDKzyPNYHwhiug q9QkcmKVTYwUoDT LhhXJCvw3oyNmVP GvWThjWpebSxjsv 6LobgE59ap2NTPx eHHsfhU9fSXZMpn J389tVGkPJtotdQ DHw8rqi8JS6MX6m pdo2tFr2MdKvs5f Zq4oyFBuojGrz3S 5UZgDjK1NLUuDrG ZQJpBwYGSqFza4m 559DieAWLe38khU FmM6uqh8i2ZyEHG qNBok3kCa7JHYpt 4iA93S33PXH5CS7 VowPonFVgpAofK5 oYzopFRdmJU2DUa b1VW3ANdCtNZKpb re2W2rwoDbLP34G QiddN7u1jXWuJj9 HBREYcvGzdxk4EB FfLoMG2tWERLrct 77tnwWZhcaanXTK RDibv4S9Hs912b8 HbV5XtB8d1WJhyS w2N9L9zPzoJnHN7 LQzq7KrFiwitGaK HMURznkkrWQrHuN xbAMAoZsH1rwmwo SCsSRsw6uxHzcnL ZdADUmYCVHpMUkU HThZhVwW2xaAWBY y6MpaJoEXv15JCx swhhXNGkmm5ZRf9 L3kgVcGpjDS69kN QMCpFdswUHcj5Xu 3cKkRuV6DZ7jMLn u6kLGhxh9ECGSzt As. ENDSLATE_BIN.
+BEGINSLATEPACK. 2t5mcXih1Sfx51S CH9rhDbtfhuV4ih apEUin14ZMSAZ8r W2ZnELPJzPCADDa bFdgZZp97dL7Dpb oGt2M1DpaiHCn7o L6yabNsTF7JaAcq samYT8nakedqasr be5TTpZ7QCzJSpS NgFE1ksmJfG2izv YdoGCstWSfr4ziV N6aPgP5TLZ2mGcH 6E7WJah9PYMXXkz DBwYacEgkZTMvxz T8YEQXRxCSBewUP 53jk86rc9Cx59ze 8WKaC2wLJ6JKN2F d9DwjPJkTrNX8sQ SyispCGBucFnd5b BfwQXkewm7XuiHQ rf2RcEWwaPDY6To ZgjPbSjP7FVbLqm uWS9niHA9VHBQzw sukTPryeoJrZsbq AUqhY7nvR78db9T EiqaLoWCF1VexbC oWgSkVvFo3CM5d5 rF1dqF63rn7i8WA SfGAMSAjWE1XPgy cD2wFXtUrnPpR6Y 1kpu91yJqybnYZk g1tVdMb37iyGtVW F361CVCwMFPYQ4W vctsgNiMzRkNpWm BqztHACWWKyEuUM DhL5rK7p77KXYo3 pj3mQ1CNh6ckLjC gtG4Eawkoriq3vH LA2Q3g1eW2v2zdM BRrJhJKZKiTZH7h U994Bnx5huHRJ3i Qio7A8z3VktMdwu wFMZdUB8RDPw3r9 p8JjeuDYWpY8LvU nQNabw23pZxpLyY by289pWZqCBWkta H1UkiQ5aYhrwAK5 5ggDfonxnUgHH2b JwZkj7zLRw7jXaZ HmcJbNHBYizFCZe rQHYrkwrywNRar6 AAJD7Lt5ABg1L5q cEVgUwuS86D2b7k x389o3D1XVSRGno JZ63aWJTZqRQhkd Rhs7cvbugraQdnF gAHfUnMBMEqjwDw RxZyQC5ZQR5daWq uTt89NSB5yfRGy6 YYRFLHNZXTG8twC fR4PmYwTwy79paq EGFPpfqdQC29nxR paMWdnrD6Uvkhf1 eFyy4ZCRUTzFYdK daFzZBihWjvR62E AgeCs7W9QuSoF6Z VJwpSSe386xndEF cqWC2ZbJPb8RkXJ Xba6FQib9v1n9rZ JMbLJ46X7HAZgEf jZE5mGzq7qP7nmA 2ssgDtn8BykTeem U9Q8wAcXzTdqfjP pDuJa9MQABZ35rt MAjMAiP6y7ta48t gZ3hyg6uhxNa7Jw kfyuWeFiDZyVg8C 8Gi9ARbMiKLdG4C J92Xrttny51AL4T Za7XK2LPGHBdKP8 9qVjBkMVdNuhaqJ 56RuAdgfBNgC4ws fLunn55BzkHmQL4 BJt3AZFqVD7bzom 4ode7JPMbeJZibo 6JAnz5sf12cm8uX o1RKcM5BfZDeRb2 5pTj7o6VhGUEDB4 je7qGUwZUnyU2af TjZRMoZ7Lv3FhV5 ZXW4uSNBfAfExvE hiBhbAKvVsY3mGG Ycw3vos6e9FZ7oh dQy6tHNm5ZQak45 zM81XZ9E2ZcQdMY KaL4wY7ZyMNGo5x j2wu3Nsv9chrjBM gdwH7MPnGx4yKuh nbERmiEyzvteGoi pzUZ39qYkgT8pmP ffN5. ENDSLATEPACK.
 ```
 
 ### Summary of Recipient Workflow
