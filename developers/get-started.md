@@ -24,9 +24,9 @@ MWC differs from other cryptocurrencies due to its **interactive transaction pro
 
 ### Tools and Setup
 1. **MWC Wallet**:
-   - Install the [official MWC Wallet](https://grin.mw) to manage transactions and interact with the blockchain.
-2. **Grin Node**:
-   - Set up and sync a Grin node, as it acts as the interface between your application and the MWC blockchain.
+   - Install the [official MWC Wallet](https://mwc.mw) to manage transactions and interact with the blockchain.
+2. **MWC Node**:
+   - Set up and sync a MWC node, as it acts as the interface between your application and the MWC blockchain.
 3. **API Access**:
    - Use the MWC Owner and Foreign APIs to programmatically manage wallets and transactions.
    - Obtain an API token for secure interactions with the wallet.
@@ -45,7 +45,7 @@ MWC employs an **interactive transaction process** that involves collaboration b
 1. **Initiate Transaction**: Start the transaction with the desired amount.
 2. **Send Slatepack**: Generate and send an encoded Slatepack (transaction details) to the recipient.
 3. **Finalize Transaction**: After receiving the recipient's response, finalize the transaction.
-4. **Broadcast Transaction**: Submit the finalized transaction to the Grin node for propagation across the network.
+4. **Broadcast Transaction**: Submit the finalized transaction to the MWC node for propagation across the network.
 5. **Track Confirmation**: Monitor the transaction status on the blockchain.
 
 ### Recipient Workflow
@@ -64,7 +64,7 @@ A **Slatepack** is an encoded message format used to exchange transaction data s
 1. **Encoding and Decoding**: Both sender and recipient must encode or decode Slatepacks during the transaction process.
 2. **Signing and Modification**: The recipient must add their signature to the Slatepack before returning it to the sender.
 3. **Finalization**: The sender finalizes the transaction after receiving the modified Slatepack.
-4. **Broadcast**: Once finalized, the transaction is broadcast to the Grin node.
+4. **Broadcast**: Once finalized, the transaction is broadcast to the MWC node.
 
 
 
