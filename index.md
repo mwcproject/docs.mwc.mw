@@ -25,11 +25,11 @@ features:
     icon: 👛
   - title: Run a Node
     details: Set up and operate MWC nodes to contribute to our decentralized network, leveraging the privacy and scalability of Mimblewimblecoin.
-    link: /nodes/overview
+    link: /node/introduction
     icon: 💻
   - title: Developers
     details: Dive deep into the Mimblewimblecoin protocol, learn about our API, and understand the node structure to build and integrate applications effectively.
-    link: /developers/build-whatever
+    link: /developers/get-started
     icon: 🧑‍💻
 
 ---
