@@ -12,12 +12,12 @@ hero:
       link: /wallet/introduction
     - theme: alt
       text: Introduction
-      link: /learn/how-mwc-works/overview
+      link: https://www.mwc.mw/what-is-mwc
 
 features:
   - title: Learn
     details: Explore how Mimblewimblecoin ensures privacy while offering greater scalability compared to any others legacy blockchain.
-    link: /learn/how-mwc-works/overview
+    link: https://www.mwc.mw/what-is-mwc
     icon: 📖
   - title: Wallet
     details: Explore MWC-compatible wallets for secure and efficient management of your Mimblewimblecoin, and connect with the community for the latest updates and support.
