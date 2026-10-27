@@ -50,7 +50,7 @@ MWC can also be built in debug mode (without the `--release` flag, but using the
 
 ## Build errors
 
-See [Troubleshooting](https://github.com/mimblewimble/docs/wiki/Troubleshooting)
+If the build fails, check the [Requirements](#requirements) above, or [open an issue](https://github.com/mwcproject/mwc-node/issues).
 
 ## What was built?
 
@@ -125,14 +125,14 @@ say, for a Raspberry Pi.
 
 ## Using mwc
 
-The wiki page [Wallet User Guide](https://github.com/mimblewimble/docs/wiki/Wallet-User-Guide)
+The [Console Wallet docs](/wallet/console/commands)
 and linked pages have more information on what features we have,
-troubleshooting, etc.
+[troubleshooting](https://github.com/mwcproject/mwc-node/blob/master/doc/troubleshooting_wallet), etc.
 
 ## Mining in MWC
 
 Please note that all mining functions for MWC have moved into a separate, standalone package called
-[mwc-miner](https://github.com/mwcproject/mwc-node-miner). Once your MWC code node is up and running,
+[mwc-miner](https://github.com/mwcproject/mwc-miner). Once your MWC code node is up and running,
 you can start mining by building and running mwc-miner against your running MWC node.
 
 For mwc-miner to be able to communicate with your MWC node, make sure that you have `enable_stratum_server = true`

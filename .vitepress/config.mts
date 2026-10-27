@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  ignoreDeadLinks: true,
+  ignoreDeadLinks: false,
   title: "MWC Documentations",
   description: "Comprehensive documentation for the node, wallet, miner, developers, and learning about MWC.",
   cleanUrls: true,
@@ -55,10 +55,10 @@ function nav() {
     {
       text: "Quick start",
       items: [
-        { text: "Node", link: "/nodes/introduction" },
-        { text: "Wallet", link: "/wallets/introduction" },
-        { text: "Miners", link: "/miners/introduction" },
-        { text: "Developers", link: "developers/get-started" },
+        { text: "Node", link: "/node/introduction" },
+        { text: "Wallet", link: "/wallet/introduction" },
+        { text: "Miners", link: "/miners/overview" },
+        { text: "Developers", link: "/developers/get-started" },
         
       ],
     },
@@ -105,7 +105,7 @@ function sidebarHome() {
         },
         {
           text: "API",
-          link: "/node/api",
+          link: "/developers/api/node",
         },
       ],
     },
@@ -303,10 +303,6 @@ function sidebarHome() {
           collapsed: true,
           items: [
             {
-              text: "Getting Started",
-              link: "/wallet/console/get-started"
-            },
-            {
               text: "Commands",
               link: "/wallet/console/commands"
             },
@@ -384,11 +380,11 @@ function sidebarHome() {
               items: [
                 {
                   text: "Creating Your Wallet",
-                  link: "/wallet/ledger/setup/create-wallet"
+                  link: "/wallet/ledger/get-started#setup-instructions"
                 },
                 {
                   text: "Backup and Recovery",
-                  link: "/wallet/ledger/setup/backup-recovery"
+                  link: "/wallet/ledger/get-started#setup-instructions"
                 }
               ]
             },
@@ -398,21 +394,17 @@ function sidebarHome() {
               items: [
                 {
                   text: "Sending MWC",
-                  link: "/wallet/ledger/funds/sending"
+                  link: "/wallet/ledger/get-started#how-to-send-mimblewimble-coin"
                 },
                 {
                   text: "Receiving MWC",
-                  link: "/wallet/ledger/funds/receiving"
+                  link: "/wallet/ledger/get-started#how-to-receive-mimblewimble-coin"
                 }
               ]
             },
             {
               text: "Troubleshooting and Support",
-              link: "/wallet/web/troubleshooting"
-            },
-            {
-              text: "FAQ",
-              link: "/wallet/web/faq"
+              link: "/wallet/ledger/get-started#support"
             }
           ]
         },

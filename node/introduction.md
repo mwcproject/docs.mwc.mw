@@ -10,22 +10,22 @@ MWC is an in-progress implementation of the MimbleWimble protocol. Many characte
   * Transaction fees are based on the number of Outputs created/destroyed and total transaction size.
   * Smooth curve for difficulty adjustments.
 
-To learn more, read our [introduction to MimbleWimble](doc/intro.md).
+To learn more, read our [introduction to MimbleWimble](https://github.com/mwcproject/mwc-node/blob/master/doc/intro.md).
 
 ## Status
 
-Much is left to be done and [contributions](CONTRIBUTING.md) are welcome (see below).
+Much is left to be done and [contributions](https://github.com/mwcproject/mwc-node/blob/master/CONTRIBUTING.md) are welcome (see below).
 
 ## Contributing
 
-To get involved, you can read our [contributing docs](CONTRIBUTING.md).
+To get involved, you can read our [contributing docs](https://github.com/mwcproject/mwc-node/blob/master/CONTRIBUTING.md).
 
 ## Getting Started
 
-To learn more about the technology, read our [introduction](doc/intro.md).
+To learn more about the technology, read our [introduction](https://github.com/mwcproject/mwc-node/blob/master/doc/intro.md).
 
 
-To build and try out MWC, see the [build docs](doc/build.md).
+To build and try out MWC, see the [build docs](/node/build).
 
 ## Credits
 

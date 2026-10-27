@@ -475,4 +475,4 @@ Miners SHOULD, MAY or MUST respect the following rules:
 
 ## Reference Implementation
 
-The current reference implementation is available at [mimblewimble/mwc-miner](https://github.com/mimblewimble/mwc-miner/blob/master/src/bin/client.rs).
+The current reference implementation is available at [mwcproject/mwc-miner](https://github.com/mwcproject/mwc-miner/blob/master/src/bin/client.rs).

@@ -34,7 +34,7 @@ The **Web Wallet** offers the flexibility of managing MWC through a web browser.
 The **Console Wallet** is a command-line tool for advanced users who prefer using terminal commands for wallet management. It provides detailed control over wallet operations and advanced functionalities.
 
 - **Use Case:** Designed for technically inclined users who are comfortable with command-line interfaces.
-- **[Getting Started](../wallet/console/get-started)**
+- **[Commands](../wallet/console/commands)**
 
 ### Ledger Wallet
 

@@ -39,7 +39,7 @@ The information on this page is current as of release v3.2.1
     - [post](#post)
     - [repost](#repost)
     - [scan](#scan)
-    - [export_proof and verify_proof](#export_proof-and-verify_proof)
+    - [export_proof and verify_proof](#export-proof-and-verify-proof)
 - [Wallet Plugins](#wallet-plugins)
     - [Keybase](#keybase)
 
@@ -357,7 +357,7 @@ If not sending via TOR, a payment proof can still be specified so long as the re
 mwc-wallet send -y -z zw5ws7q4oh3arzskmlkco6ia4awmjr2usv72ax7z3pfmhvklhmavzoid -d "http://192.168.0.2:3415" 60.00
 ```
 
-Once a payment-proof enabled transaction is completed, the proof can be viewed in the sender's transaction log when viewing a single transaction (see the [`txs`](#txs) command). It can also be exported and verified via the [`export-proof` and `verify_proof`](#export_proof-and-verify_proof) commands.
+Once a payment-proof enabled transaction is completed, the proof can be viewed in the sender's transaction log when viewing a single transaction (see the [`txs`](#txs) command). It can also be exported and verified via the [`export-proof` and `verify_proof`](#export-proof-and-verify-proof) commands.
 
 ### Other flags
 

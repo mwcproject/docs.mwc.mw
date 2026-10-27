@@ -4,19 +4,19 @@ Hardware wallets provide a secure way to manage your crypto assets by keeping yo
 
 ## Quick Links
 
-* [Requirements](#user-content-requirements)
-* [Installation Instructions](#user-content-installation-instructions)
-* [Setup Instructions](#user-content-setup-instructions)
-* [How To View Your MimbleWimble Coin Balance](#user-content-how-to-view-your-mimblewimble-coin-balance)
-* [How To Receive MimbleWimble Coin](#user-content-how-to-receive-mimblewimble-coin)
-* [How To Send MimbleWimble Coin](#user-content-how-to-send-mimblewimble-coin)
-* [Support](#user-content-support)
+* [Requirements](#requirements)
+* [Installation Instructions](#installation-instructions)
+* [Setup Instructions](#setup-instructions)
+* [How To View Your MimbleWimble Coin Balance](#how-to-view-your-mimblewimble-coin-balance)
+* [How To Receive MimbleWimble Coin](#how-to-receive-mimblewimble-coin)
+* [How To Send MimbleWimble Coin](#how-to-send-mimblewimble-coin)
+* [Support](#support)
 
 ## Requirements
 
-1. [You've initialized your Ledger hardware wallet.](https://support.ledger.com/hc/en-us/articles/360000613793-Set-up-your-Ledger-Nano-S?docs=true)
-2. [The latest firmware is installed on your Ledger hardware wallet.](https://support.ledger.com/hc/en-us/articles/360002731113-Update-Ledger-Nano-S-firmware?docs=true)
-3. [You have Ledger Live Desktop installed.](https://support.ledger.com/hc/en-us/articles/4404389606417-Download-and-install-Ledger-Live?docs=true)
+1. [You've initialized your Ledger hardware wallet.](https://support.ledger.com/article/360000613793-zd)
+2. [The latest firmware is installed on your Ledger hardware wallet.](https://support.ledger.com/article/360002731113-zd)
+3. [You have Ledger Live Desktop installed.](https://support.ledger.com/article/4404389606417-zd)
 
 ## Installation Instructions
 
